@@ -21,7 +21,7 @@ systemctl enable solana-sys-tuner.service
 systemctl restart solana-sys-tuner.service
 
 ### systemd service
-wget https://raw.githubusercontent.com/mr0wnage/solana/main/solana-tds.service?token=AHRTSGMFAHZNUU4DEYHMWY3AQUUR6 -O /etc/systemd/system/solana.service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/tds-solana.service -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
 systemctl enable solana.service
