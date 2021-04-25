@@ -1,0 +1,66 @@
+#=====================================================================================================================================
+# TdS service file 20/04/2021 [ver.1.6.6]  
+#=====================================================================================================================================
+[Unit]
+Description=Solana TdS node
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+LimitNOFILE=2048000
+LogRateLimitIntervalSec=0
+
+Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea'"
+Environment="RUST_LOG=solana=info"
+Environment="ENTRYPOINT=entrypoint.testnet.solana.com:8001"
+Environment="EXPECTED_GENESIS_HASH=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
+Environment="EXPECTED_BANK_HASH=G4vJCyJXY1u8An6bdtoPNBdTFDwTtre7vvvKGpSyzL6q"
+Environment="SUPERMAJORITY=70430039"
+Environment="EXPECTED_SHRED_VERSION=18122"
+Environment="HARD_FORK=50438183"
+Environment="TRUSTED_VALIDATOR1=5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on"
+Environment="TRUSTED_VALIDATOR2=Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN"
+Environment="TRUSTED_VALIDATOR3=9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv"
+Environment="TRUSTED_VALIDATOR4=ta1Uvfb7W5BRPrdGnhP9RmeCGKzBySGM1hTE4rBRy6T"
+Environment="TRUSTED_VALIDATOR5=7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY"
+
+ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
+  --ledger /root/solana/validator-ledger \
+  --dynamic-port-range 8001-8020 \
+  --identity /root/solana/validator-keypair.json \
+  --vote-account /root/solana/vote-account-keypair.json \
+  --gossip-port 8001 \
+  --rpc-port 8899 \
+  --log - \
+  --no-port-check \
+  --private-rpc \
+  --no-untrusted-rpc \
+  --rpc-bind-address localhost \
+  --snapshot-interval-slots 0 \
+  --limit-ledger-size 50000000 \
+  --wal-recovery-mode skip_any_corrupted_record \
+  --skip-poh-verify \
+  --no-check-vote-account \
+  --entrypoint ${ENTRYPOINT} \
+  --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --trusted-validator ${TRUSTED_VALIDATOR1} \
+  --trusted-validator ${TRUSTED_VALIDATOR2} \
+  --trusted-validator ${TRUSTED_VALIDATOR3} \
+  --trusted-validator ${TRUSTED_VALIDATOR5}
+
+
+[Install]
+WantedBy=multi-user.target
+
+#  --hard-fork ${HARD_FORK} \
+#  --trusted-validator ${TRUSTED_VALIDATOR4}
+#  --expected-shred-version ${EXPECTED_SHRED_VERSION} \
+#  --expected-bank-hash ${EXPECTED_BANK_HASH} \
+#  --accounts-db-caching-enabled
+#  --wait-for-supermajority ${SUPERMAJORITY} \
+#  --no-snapshot-fetch \
+#  --no-genesis-fetch
