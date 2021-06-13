@@ -16,7 +16,7 @@ curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.10/install/s
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
 # solana-sys-tuner 
-wget https://github.com/mr0wnage/solana/blob/6f8e2e2231148c7ce8e6bad59a6b4ce3ea3c145b/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
+wget https://gist.githubusercontent.com/AGx10k/b673ecdf3acae4a0596d241c9de90abf/raw/768c16ced66e39f3588e496966c99bc982c829fc/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service
