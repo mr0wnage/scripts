@@ -1,5 +1,5 @@
 #
-# Last update 16/05/2021  version 1.6.9
+# Last update 13/06/2021  version 1.7.1
 #
 
 apt-get update && \
@@ -10,20 +10,20 @@ systemctl disable ondemand
 
 ### install mainnet beta 
 #first install:
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.10/install/solana-install-init.sh | sh -s - v1.6.10
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.10/install/solana-install-init.sh | sh -s - v1.7.1
 
 ###
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
 # solana-sys-tuner 
-wget https://gist.githubusercontent.com/AGx10k/b673ecdf3acae4a0596d241c9de90abf/raw/768c16ced66e39f3588e496966c99bc982c829fc/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service
 systemctl restart solana-sys-tuner.service
 
 ### systemd service
-wget https://raw.githubusercontent.com/mr0wnage/solana/main/solana-tds.service?token=AHRTSGMFAHZNUU4DEYHMWY3AQUUR6 -O /etc/systemd/system/solana.service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/tds-solana.service -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
 systemctl enable solana.service
