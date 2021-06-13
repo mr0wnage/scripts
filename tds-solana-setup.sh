@@ -1,4 +1,6 @@
-# Last update 25/04/2021
+#
+# Last update 16/05/2021  version 1.6.9
+#
 
 apt-get update && \
 echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && \
@@ -8,20 +10,20 @@ systemctl disable ondemand
 
 ### install mainnet beta 
 #first install:
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.6/install/solana-install-init.sh | sh -s - v1.6.6
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.10/install/solana-install-init.sh | sh -s - v1.6.10
 
 ###
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
 # solana-sys-tuner 
-wget https://gist.githubusercontent.com/AGx10k/b673ecdf3acae4a0596d241c9de90abf/raw/768c16ced66e39f3588e496966c99bc982c829fc/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
+wget https://github.com/mr0wnage/solana/blob/6f8e2e2231148c7ce8e6bad59a6b4ce3ea3c145b/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service
 systemctl restart solana-sys-tuner.service
 
 ### systemd service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/tds-solana.service -O /etc/systemd/system/solana.service
+wget https://raw.githubusercontent.com/mr0wnage/solana/main/solana-tds.service?token=AHRTSGMFAHZNUU4DEYHMWY3AQUUR6 -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
 systemctl enable solana.service
@@ -48,7 +50,7 @@ cd /root/solana
 ### создаём файл с ключом, который генерировали до этого
 touch validator-keypair.json && chmod 0600 validator-keypair.json && echo edit validator-keypair.json && sleep 5 && nano validator-keypair.json
 
-solana config set --url http://testnet.solana.com  --keypair /root/solana/validator-keypair.json
+solana config set --url http://api.testnet.solana.com --keypair /root/solana/validator-keypair.json
 
 solana balance
 
