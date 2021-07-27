@@ -1,0 +1,51 @@
+====================================
+# Solana MnB service file 27/07/2021
+# version 1.6.20
+====================================
+[Unit]
+Description=Solana Validator
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+
+Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password""
+Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
+Environment="RUST_LOG=solana=info"
+Environment="ENTRYPOINT=mainnet-beta.solana.com:8001"
+
+ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
+  --entrypoint ${ENTRYPOINT} \
+  --expected-genesis-hash $EXPECTED_GENESIS_HASH \
+  --identity /root/solana/validator-keypair.json \
+  --vote-account /root/solana/vote-account-keypair.json \
+  --trusted-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
+  --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
+  --trusted-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
+  --trusted-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
+  --rpc-bind-address 127.0.0.1 \
+  --private-rpc \
+  --no-untrusted-rpc \
+  --dynamic-port-range 8001-8020 \
+  --gossip-port 8001 \
+  --rpc-port 8899 \
+  --log - \
+  --ledger /root/solana/validator-ledger \
+  --limit-ledger-size 50000000 \
+  --no-port-check \
+  --no-poh-speed-test \
+  --skip-poh-verify \
+  --no-check-vote-account \
+  --maximum-local-snapshot-age 500 \
+  --snapshot-interval-slots 1000
+
+[Install]
+WantedBy=multi-user.target
+
+# --no-snapshot-fetch
+# --no-genesis-fetch
+# --wal-recovery-mode skip_any_corrupted_record \
