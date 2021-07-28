@@ -12,6 +12,6 @@ solana telegram alerts [DELINQUENT, SYNC]
 добавть в crontab
 `crontab -e`
 
-`*/15 * * * * /root/solana-telegram-delinq.sh
+`*/15 * * * * /root/solana-telegram-delinq.sh`
 
-*/15 * * * * /root/solana-telegram-sync.sh`
+`*/15 * * * * /root/solana-telegram-sync.sh`
