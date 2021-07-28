@@ -6,13 +6,12 @@ solana telegram alerts [DELINQUENT, SYNC]
 `solana-telegram-sync.sh`
 
 права на исполнение
-chmod +x Send_msg_toTelBot.sh
-
-chmod +x solana-telegram-*
+`chmod +x Send_msg_toTelBot.sh`
+`chmod +x solana-telegram-*`
 
 добавть в crontab
-crontab -e
+`crontab -e`
 
-*/15 * * * * /root/solana-telegram-delinq.sh
+`*/15 * * * * /root/solana-telegram-delinq.sh
 
-*/15 * * * * /root/solana-telegram-sync.sh
+*/15 * * * * /root/solana-telegram-sync.sh`
