@@ -1,5 +1,5 @@
 #!/bin/bash
-
+ 
 INSYNC=`timeout 30 /root/.local/share/solana/install/active_release/bin/solana catchup /root/solana/validator-keypair.json http://127.0.0.1:8899 | grep caught`
 
 if [[ -z ${INSYNC} ]]
