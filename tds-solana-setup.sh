@@ -109,11 +109,15 @@ solana delegate-stake /root/solana/validator-stake-keypair.json /root/solana/vot
 
 # grep some info
 solana validators | grep -e "$(solana-keygen pubkey /root/solana/validator-keypair.json)"
-#
+
+# теперь по нашему стейку
 solana stakes | grep "$(solana-keygen pubkey /root/solana/validator-stake-keypair.json)" -A 10 -B 1
 
+### устанавливаем комиссию
+solana vote-update-commission /root/solana/vote-account-keypair.json 10 /root/solana/validator-keypair.json
+
 ### publish info about validator
-solana validator-info publish "???" -n ??? -w "<website>"
+solana validator-info publish "???" -n ??? -w "???"
 
 ### example:
 ###solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com"
