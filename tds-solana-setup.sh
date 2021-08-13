@@ -117,9 +117,7 @@ solana stakes | grep "$(solana-keygen pubkey /root/solana/validator-stake-keypai
 solana vote-update-commission /root/solana/vote-account-keypair.json 10 /root/solana/validator-keypair.json
 
 ### publish info about validator
-solana validator-info publish "???" -n ??? -w "???"
+solana validator-info publish "???" -n ??? -w "???" - d "???"
 
-### example:
-###solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com"
-###solana validator-info publish "Elvis Validator" -n elvis
-###solana validator-info publish "Elvis Validator"
+# example:
+# solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com" -d "Some detail info here"
