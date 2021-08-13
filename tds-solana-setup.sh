@@ -1,6 +1,7 @@
 #
-# Last update 13/06/2021  version 1.7.1
+# Last update 13/08/2021  version 1.7.10
 #
+### Ставим оптимизацию CPU
 
 apt-get update && \
 echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && \
@@ -8,21 +9,20 @@ apt-get install -y cpufrequtils moreutils && \
 systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
-### install mainnet beta 
-#first install:
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.10/install/solana-install-init.sh | sh -s - v1.7.1
+### install mainnet beta (first install):
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.7.10/install/solana-install-init.sh | sh -s - v1.7.10
 
-###
+### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
-# solana-sys-tuner 
+# Устанавливаем solana-sys-tuner.service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service
 systemctl restart solana-sys-tuner.service
 
-### systemd service
+# Устанавливаем service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/tds-solana.service -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
@@ -101,14 +101,19 @@ solana-keygen new -o /root/solana/validator-stake-keypair.json
 ### бэкапим
 cat validator-stake-keypair.json &&echo
 
-### delegate
+### delegate to stake.acc
 solana create-stake-account /root/solana/validator-stake-keypair.json 250
 
+# delegate stake.acc to vote-account
+solana delegate-stake /root/solana/validator-stake-keypair.json /root/solana/vote-account-keypair.json
+
+# grep some info
 solana validators | grep -e "$(solana-keygen pubkey /root/solana/validator-keypair.json)"
+#
+solana stakes | grep "$(solana-keygen pubkey /root/solana/validator-stake-keypair.json)" -A 10 -B 1
 
 ### publish info about validator
-solana validator-info publish "Spartak" -n spartak1950may -w "<website>"
-solana validator-info publish "Vietcong" -n vasina_ts -w "<website>"
+solana validator-info publish "???" -n ??? -w "<website>"
 
 ### example:
 ###solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com"
