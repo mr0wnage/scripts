@@ -1,30 +1,35 @@
+#
+# Last update 26/08/2021  version 1.6.21
+#
+### Ставим оптимизацию CPU
+
 apt-get update && \
 echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && \
 apt-get install -y cpufrequtils moreutils && \
 systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
-### install mainnet beta 
-#first install:
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.20/install/solana-install-init.sh | sh -s - v1.6.20
+### Install mainnet beta  (first install)
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.21/install/solana-install-init.sh | sh -s - v1.6.21
 
+### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
-### systemd service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/mnb-solana.service -O /etc/systemd/system/solana.service
-chmod 0644 /etc/systemd/system/solana.service
-systemctl daemon-reload
-systemctl enable solana.service 
-
-# solana-sys-tuner 
+# Устанавливаем solana-sys-tuner.service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service 
 systemctl restart solana-sys-tuner.service 
 
-#update
-export ver_install=1.6.20 && \
+# Устанавливаем service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/mnb-solana.service -O /etc/systemd/system/solana.service
+chmod 0644 /etc/systemd/system/solana.service
+systemctl daemon-reload
+systemctl enable solana.service 
+
+# Update
+export ver_install=1.6.21 && \
 solana-install init $ver_install && \
 unset ver_install && \
 systemctl restart solana-sys-tuner && \
@@ -43,7 +48,6 @@ rm -rf /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb
 #mkdir -p /root/solana/validator-ledger/accounts
 #echo 'tmpfs        /root/solana/validator-ledger/accounts tmpfs   nodev,nosuid,noexec,nodiratime,size=64G   0 0' >> /etc/fstab 
 #mount  /root/solana/validator-ledger/accounts
-
 
 mkdir /root/solana
 cd /root/solana
@@ -91,7 +95,8 @@ solana vote-update-commission /root/solana/vote-account-keypair.json 10 /root/so
 systemctl start solana
 
 journalctl -u solana -f --no-hostname | ccze
-screen -S solana.update -h 1000000
+screen -S solana.catchup -h 1000000
+
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts/ 2>/dev/null; timeout 30 solana catchup ~/solana/validator-keypair.json http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production  --epoch $(solana epoch )  | grep -e " Identity Pubkey\|$(solana-keygen pubkey /root/solana/validator-keypair.json)"; sleep 60; done
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts*/ 2>/dev/null; timeout 30 solana catchup ~/solana/validator-keypair.json http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production  --epoch $(solana epoch )  | grep -e " Identity Pubkey\|$(solana-keygen pubkey /root/solana/validator-keypair.json)"; for i in $(seq 1 6); do for j in $(seq 1 30); do echo -ne .; sleep 1; done; echo -ne $(( i * j )); done; echo ""; done
 
