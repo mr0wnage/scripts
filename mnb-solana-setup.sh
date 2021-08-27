@@ -1,5 +1,5 @@
 #
-# Last update 26/08/2021  version 1.6.21
+# Last update 27/08/2021  version 1.6.22
 #
 ### Ставим оптимизацию CPU
 
@@ -10,7 +10,7 @@ systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.21/install/solana-install-init.sh | sh -s - v1.6.21
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.22/install/solana-install-init.sh | sh -s - v1.6.22
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
@@ -29,7 +29,7 @@ systemctl daemon-reload
 systemctl enable solana.service 
 
 # Update
-export ver_install=1.6.21 && \
+export ver_install=1.6.22 && \
 solana-install init $ver_install && \
 unset ver_install && \
 systemctl restart solana-sys-tuner && \
