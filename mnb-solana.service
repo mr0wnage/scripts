@@ -1,6 +1,6 @@
 ====================================
-# Solana MnB service file 27/07/2021
-# version 1.6.20
+# Solana MnB service file 15/09/2021
+# version 1.6.25        
 ====================================
 [Unit]
 Description=Solana Validator
@@ -12,21 +12,30 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-
+LimitNOFILE=1000000
 Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password""
 Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
 Environment="RUST_LOG=solana=info"
-Environment="ENTRYPOINT=mainnet-beta.solana.com:8001"
-
+Environment="RUST_BACKTRACE=full"
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
-  --entrypoint ${ENTRYPOINT} \
-  --expected-genesis-hash $EXPECTED_GENESIS_HASH \
+  --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
+  --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
+  --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
+  --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
+  --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
   --identity /root/solana/validator-keypair.json \
   --vote-account /root/solana/vote-account-keypair.json \
-  --trusted-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
-  --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
-  --trusted-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
-  --trusted-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
+  --expected-genesis-hash $EXPECTED_GENESIS_HASH \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
+  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
+  --trusted-validator ba1cUvbuGe7k2Um2YKmRnR7ZAy3sK9mQKJkMCGVhcov \
+  --trusted-validator ba2eZEU27TqR1MB9WUPJ2F7dcTrNsgdx38tBg53GexZ \
+  --trusted-validator ba3zMkMp87HZg27Z7EDEkxE48zcKgJ59weFYtrKadY7 \
+  --trusted-validator ba4MuwPdsx6DKXY6vVCbheAi5UTiMgmBefCGbVhfeQY \
+  --trusted-validator ba5rfuZ37gxhrLcsgA5fzCg8BvSQcTERPqY14Qffa3J \
+  --trusted-validator ba6wkJVhenDL2HpH8bYLVEMKwCgo21cJm9AmPEEVMFi \
+  --trusted-validator F77qhZH7Net35Hz2EVUoqyUQuSMdSwxnLRwZZsAcN9X6 \
   --rpc-bind-address 127.0.0.1 \
   --private-rpc \
   --no-untrusted-rpc \
@@ -41,11 +50,15 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --skip-poh-verify \
   --no-check-vote-account \
   --maximum-local-snapshot-age 500 \
+  --snapshot-compression none \
   --snapshot-interval-slots 1000
 
 [Install]
 WantedBy=multi-user.target
 
-# --no-snapshot-fetch
-# --no-genesis-fetch
-# --wal-recovery-mode skip_any_corrupted_record \
+#  --wait-for-supermajority 96542804 \
+#  --no-snapshot-fetch \
+#  --no-genesis-fetch \
+#  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
+#  --expected-shred-version 8573 \
+#  --hard-fork 96542805 \
