@@ -1,10 +1,9 @@
 #=====================================================================================================================================
-# TdS service file 13/08/2021 [ver.1.7.10]  
+# TdS service file 22/09/2021 [ver.1._._]  
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
 After=sys-tuner-solana.service
-After=network.target
 StartLimitIntervalSec=0
 
 [Service]
@@ -19,15 +18,7 @@ Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=tds,
 Environment="RUST_LOG=solana=info"
 Environment="ENTRYPOINT=entrypoint.testnet.solana.com:8001"
 Environment="EXPECTED_GENESIS_HASH=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
-Environment="EXPECTED_BANK_HASH=G4vJCyJXY1u8An6bdtoPNBdTFDwTtre7vvvKGpSyzL6q"
-Environment="SUPERMAJORITY=70430039"
-Environment="EXPECTED_SHRED_VERSION=18122"
 Environment="HARD_FORK=50438183"
-Environment="TRUSTED_VALIDATOR1=5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on"
-Environment="TRUSTED_VALIDATOR2=Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN"
-Environment="TRUSTED_VALIDATOR3=9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv"
-Environment="TRUSTED_VALIDATOR4=ta1Uvfb7W5BRPrdGnhP9RmeCGKzBySGM1hTE4rBRy6T"
-Environment="TRUSTED_VALIDATOR5=7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY"
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --ledger /root/solana/validator-ledger \
@@ -48,20 +39,19 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-check-vote-account \
   --entrypoint ${ENTRYPOINT} \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --trusted-validator ${TRUSTED_VALIDATOR1} \
-  --trusted-validator ${TRUSTED_VALIDATOR2} \
-  --trusted-validator ${TRUSTED_VALIDATOR3} \
-  --trusted-validator ${TRUSTED_VALIDATOR5}
-
+  --wait-for-supermajority 95038710 \
+  --expected-shred-version 50850 \
+  --expected-bank-hash E3MJucWkWkugqJ8ewHAkDWuCN6uDxEychwjFFCwJ16ic \
+  --known-validator 3K8BYGTPD9AxqYQDPdU8PPy6AfiSwf4hDmFy1xXGB8Ns \
+  --known-validator 5dB4Ygb8Sf3Sssdxxrpbb4NFX9bMrYnieiz11Vr5xJkJ \
+  --known-validator 7TcmJn12spW6KQJp4fvvo45d1hpxS8EnLjKMxihtNZ1V \
+  --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
+  --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk
 
 [Install]
 WantedBy=multi-user.target
 
 #  --hard-fork ${HARD_FORK} \
-#  --trusted-validator ${TRUSTED_VALIDATOR4}
-#  --expected-shred-version ${EXPECTED_SHRED_VERSION} \
-#  --expected-bank-hash ${EXPECTED_BANK_HASH} \
 #  --accounts-db-caching-enabled
-#  --wait-for-supermajority ${SUPERMAJORITY} \
 #  --no-snapshot-fetch \
 #  --no-genesis-fetch
