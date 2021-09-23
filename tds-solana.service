@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 22/09/2021 [ver.1.7.12]  
+# TdS service file 23/09/2021 [ver.1.6.6]  
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -18,7 +18,6 @@ Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=tds,
 Environment="RUST_LOG=solana=info"
 Environment="ENTRYPOINT=entrypoint.testnet.solana.com:8001"
 Environment="EXPECTED_GENESIS_HASH=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
-Environment="HARD_FORK=50438183"
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --ledger /root/solana/validator-ledger \
@@ -39,19 +38,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-check-vote-account \
   --entrypoint ${ENTRYPOINT} \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --wait-for-supermajority 95038710 \
-  --expected-shred-version 50850 \
-  --expected-bank-hash E3MJucWkWkugqJ8ewHAkDWuCN6uDxEychwjFFCwJ16ic \
   --known-validator 3K8BYGTPD9AxqYQDPdU8PPy6AfiSwf4hDmFy1xXGB8Ns \
   --known-validator 5dB4Ygb8Sf3Sssdxxrpbb4NFX9bMrYnieiz11Vr5xJkJ \
   --known-validator 7TcmJn12spW6KQJp4fvvo45d1hpxS8EnLjKMxihtNZ1V \
   --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
   --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk
-
-[Install]
-WantedBy=multi-user.target
-
-#  --hard-fork ${HARD_FORK} \
-#  --accounts-db-caching-enabled
-#  --no-snapshot-fetch \
-#  --no-genesis-fetch
