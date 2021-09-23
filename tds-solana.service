@@ -43,3 +43,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --known-validator 7TcmJn12spW6KQJp4fvvo45d1hpxS8EnLjKMxihtNZ1V \
   --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
   --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk
+  
+[Install]
+WantedBy=multi-user.target
