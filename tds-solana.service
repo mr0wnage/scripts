@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 23/09/2021 [ver.1.6.6]  
+# TdS service file 30/09/2021 [ver.1._._]  
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -42,7 +42,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --known-validator 5dB4Ygb8Sf3Sssdxxrpbb4NFX9bMrYnieiz11Vr5xJkJ \
   --known-validator 7TcmJn12spW6KQJp4fvvo45d1hpxS8EnLjKMxihtNZ1V \
   --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
-  --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk
+  --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk \
+  --known-validator 82k4RGZAJxtXvW3hzgmHB2q4oDHzgwMR2cGXup324gsJ
   
 [Install]
 WantedBy=multi-user.target
