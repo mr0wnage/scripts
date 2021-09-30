@@ -1,6 +1,6 @@
 ====================================
-# Solana MnB service file 15/09/2021
-# version 1.6.25        
+# Solana MnB service file 30/09/2021
+# version 1.6.27
 ====================================
 [Unit]
 Description=Solana Validator
