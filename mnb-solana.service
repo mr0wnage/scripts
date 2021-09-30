@@ -29,6 +29,10 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-snapshot-fetch \
   --no-genesis-fetch \
   --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
+  --trusted-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
+  --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
+  --trusted-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
+  --trusted-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
   --trusted-validator ba1cUvbuGe7k2Um2YKmRnR7ZAy3sK9mQKJkMCGVhcov \
   --trusted-validator ba2eZEU27TqR1MB9WUPJ2F7dcTrNsgdx38tBg53GexZ \
   --trusted-validator ba3zMkMp87HZg27Z7EDEkxE48zcKgJ59weFYtrKadY7 \
