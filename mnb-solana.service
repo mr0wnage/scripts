@@ -26,8 +26,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --identity /root/solana/validator-keypair.json \
   --vote-account /root/solana/vote-account-keypair.json \
   --expected-genesis-hash $EXPECTED_GENESIS_HASH \
-  --no-snapshot-fetch \
-  --no-genesis-fetch \
   --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
   --trusted-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
   --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
@@ -53,9 +51,10 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-poh-speed-test \
   --skip-poh-verify \
   --no-check-vote-account \
+  --snapshot-interval-slots 3000 \
+  --snapshot-archive-format tar \
   --maximum-local-snapshot-age 500 \
-  --snapshot-compression none \
-  --snapshot-interval-slots 1000
+  --snapshot-compression none
 
 [Install]
 WantedBy=multi-user.target
