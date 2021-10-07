@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 06/10/2021 [ver.1.7.13]  
+# TdS service file 07/10/2021 [ver.1.7.13]  
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -39,11 +39,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-check-vote-account \
   --entrypoint ${ENTRYPOINT} \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --wait-for-supermajority 96965687 \
-  --no-snapshot-fetch \
-  --no-genesis-fetch \
-  --expected-bank-hash 5GSuuhkJfRqZK9LQdvFY7bramdNiQgTEFJp8w7DtZVUN \
-  --expected-shred-version 37137 \
   --entrypoint 5.9.35.85:8000 \
   --entrypoint 94.198.53.85:8000 \
   --entrypoint 178.170.42.36:8000 \
