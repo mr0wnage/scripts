@@ -1,6 +1,6 @@
 ====================================
-# Solana MnB service file 30/09/2021
-# version 1.6.27
+# Solana MnB service file 11/10/2021
+# version 1.7.14
 ====================================
 [Unit]
 Description=Solana Validator
@@ -31,12 +31,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
   --trusted-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
   --trusted-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
-  --trusted-validator ba1cUvbuGe7k2Um2YKmRnR7ZAy3sK9mQKJkMCGVhcov \
-  --trusted-validator ba2eZEU27TqR1MB9WUPJ2F7dcTrNsgdx38tBg53GexZ \
-  --trusted-validator ba3zMkMp87HZg27Z7EDEkxE48zcKgJ59weFYtrKadY7 \
-  --trusted-validator ba4MuwPdsx6DKXY6vVCbheAi5UTiMgmBefCGbVhfeQY \
-  --trusted-validator ba5rfuZ37gxhrLcsgA5fzCg8BvSQcTERPqY14Qffa3J \
-  --trusted-validator ba6wkJVhenDL2HpH8bYLVEMKwCgo21cJm9AmPEEVMFi \
   --trusted-validator F77qhZH7Net35Hz2EVUoqyUQuSMdSwxnLRwZZsAcN9X6 \
   --rpc-bind-address 127.0.0.1 \
   --private-rpc \
