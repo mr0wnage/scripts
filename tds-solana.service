@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 07/10/2021 [ver.1.7.13]  
+# TdS service file 22/10/2021 [ver.1.8.1]  
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -30,7 +30,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-port-check \
   --private-rpc \
   --no-untrusted-rpc \
-  --rpc-bind-address localhost \
+  --rpc-bind-address 127.0.0.1 \
   --snapshot-interval-slots 3000 \
   --snapshot-archive-format tar \
   --limit-ledger-size 50000000 \
@@ -53,6 +53,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
   --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk \
   --known-validator 82k4RGZAJxtXvW3hzgmHB2q4oDHzgwMR2cGXup324gsJ
-  
+
 [Install]
 WantedBy=multi-user.target
