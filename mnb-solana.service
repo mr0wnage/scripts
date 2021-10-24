@@ -47,8 +47,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-check-vote-account \
   --snapshot-interval-slots 3000 \
   --snapshot-archive-format tar \
-  --maximum-local-snapshot-age 500 \
-  --snapshot-compression none
+  --maximum-local-snapshot-age 500
 
 [Install]
 WantedBy=multi-user.target
