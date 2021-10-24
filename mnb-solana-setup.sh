@@ -1,5 +1,5 @@
 #
-# Last update 27/08/2021  version 1.6.22
+# Last update 24/10/2021  version 1.7.14
 #
 ### Ставим оптимизацию CPU
 
@@ -10,7 +10,7 @@ systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.6.22/install/solana-install-init.sh | sh -s - v1.6.22
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.7.14/install/solana-install-init.sh | sh -s - v1.7.14
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
@@ -133,3 +133,6 @@ clear && solana stakes $SOLANA_VOTE_ADDRESS   ; echo identity balance: $(solana 
 
 ###
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts*/ 2>/dev/null; timeout 30 solana catchup $SOLANA_ADDRESS http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production    | grep -e " Identity \|$SOLANA_ADDRESS"; for i in $(seq 1 6); do for j in $(seq 1 30); do echo -ne .; sleep 1; done; echo -ne $(( i * j )); done; echo ""; done
+
+# monitoring
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh
