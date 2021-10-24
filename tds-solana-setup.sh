@@ -1,5 +1,5 @@
 #
-# Last update 22/10/2021  version 1.8.1
+# Last update 24/10/2021  version 1.8.1
 #
 ### Ставим оптимизацию CPU
 
@@ -121,3 +121,6 @@ solana validator-info publish "???" -n ??? -w "???" - d "???"
 
 # example:
 # solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com" -d "Some detail info here"
+
+# monitoring
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh
