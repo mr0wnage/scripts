@@ -29,7 +29,7 @@ systemctl daemon-reload
 systemctl enable solana.service 
 
 # Update
-export ver_install=1.6.22 && \
+export ver_install=1.7.14 && \
 solana-install init $ver_install && \
 unset ver_install && \
 systemctl restart solana-sys-tuner && \
