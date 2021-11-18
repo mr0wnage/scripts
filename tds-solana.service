@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 03/11/2021 [ver.1.8.2]
+# TdS service file 18/11/2021 [ver.1.8.5]
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -42,6 +42,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --entrypoint 5.9.35.85:8000 \
   --entrypoint 94.198.53.85:8000 \
   --entrypoint 178.170.42.36:8000 \
+  --no-os-network-stats-reporting \
   --known-validator eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ \
   --known-validator F1TuusSghAobmbGAgNrdxRS9nBjwT6J1yyALUvpEA1is \
   --known-validator 9YVpEeZf8uBoUtzCFC6SSFDDqPt16uKFubNhLvGxeUDy \
