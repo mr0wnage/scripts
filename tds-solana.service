@@ -53,7 +53,20 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --known-validator 7TcmJn12spW6KQJp4fvvo45d1hpxS8EnLjKMxihtNZ1V \
   --known-validator 4jhyvbBHbsRDF6och7pDQ7ahYTUr7wNkAYJTLLuMUtku \
   --known-validator 4rVaXrd7BLSFZMSm4Lq63nxkVyezGxsQVpUhc9LqbxVk \
-  --known-validator 82k4RGZAJxtXvW3hzgmHB2q4oDHzgwMR2cGXup324gsJ
+  --known-validator 82k4RGZAJxtXvW3hzgmHB2q4oDHzgwMR2cGXup324gsJ \
+  --wait-for-supermajority 103858866 \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
+  --expected-bank-hash 7haWD8r1tvRaK1gw95eVedXKJTVD43PXnoBXyjerFbav \
+  --expected-shred-version 40424 \
+  --entrypoint 5.9.35.85:8001 \
+  --entrypoint 178.170.42.36:8000 \
+  --known-validator GcibmF4zgb6Vr4bpZZYHGDPZNWiLnBDUHdpJZTsTDvwe \
+  --known-validator eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ \
+  --known-validator 3iPu9xQ3mCFmqME9ZajuZbFHjwagAxhgfTxnc4pWbEBC \
+  --known-validator 8SRKNfvMerfA1BdU79CAwU4wNfjnDvFrBo3o5f5TS4uv \
+  --known-validator FCnsZL8d45gC5aVsmheV3zs533DfM2jRk1vNnDgLNkfr \
+  --known-validator 8VNj7K6ssFcUogRfT6miUzz8HTKu1nX2n8MYr5z49CXb
 
 [Install]
 WantedBy=multi-user.target
