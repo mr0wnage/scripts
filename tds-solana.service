@@ -63,6 +63,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --entrypoint entrypoint.testnet.solana.com:8001 \
   --entrypoint entrypoint2.testnet.solana.com:8001 \
   --entrypoint entrypoint3.testnet.solana.com:8001 \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
   --expected-bank-hash BEAKFSqMu6H7s6H88wRrpTerGpmoLgMjSWbbyUheLti1
 
 
