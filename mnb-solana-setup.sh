@@ -1,16 +1,11 @@
 #
-# Last update 22/11/2021  version 1.8.5
+# Last update 05/01/2022  version 1.8.11
 #
 ### Ставим оптимизацию CPU
-
-apt-get update && \
-echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && \
-apt-get install -y cpufrequtils moreutils && \
-systemctl restart cpufrequtils.service && \
-systemctl disable ondemand
+apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.8.5/install/solana-install-init.sh | sh -s - v1.8.5
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.8.11/install/solana-install-init.sh | sh -s - v1.8.11
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
@@ -19,32 +14,32 @@ export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
-systemctl enable solana-sys-tuner.service 
-systemctl restart solana-sys-tuner.service 
+systemctl enable solana-sys-tuner.service
+systemctl restart solana-sys-tuner.service
 
-# Устанавливаем service
+# Устанавливаем solana.service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/mnb-solana.service -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
-systemctl enable solana.service 
+systemctl enable solana.service
 
 # Update
-export ver_install=1.8.5 && \
+export ver_install=1.8.11 && \
 solana-install init $ver_install && \
 unset ver_install && \
 systemctl restart solana-sys-tuner && \
 echo version upgraded, sys-tuner restarted, solana service NOT restarted
 
-### exclude solana-validator from rsyslog
+### Исключаем solana-validator из rsyslog
 echo 'if $programname == "solana-validator" then stop' > /etc/rsyslog.d/01-solana-remove.conf && systemctl restart rsyslog
 
-### install prometheus-node-exporter 0.17.0+ds-3+b11 just because it works with my current dashboard
+### Устанавливаем prometheus-node-exporter 0.17.0+ds-3+b11 just because it works with my current dashboard
 lsb_release -a 2>&1 | grep -q Ubuntu && \
 wget http://http.us.debian.org/debian/pool/main/p/prometheus-node-exporter/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb -O /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb && \
 dpkg -i /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb && \
 rm -rf /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb
 
-### tmpfs accounts 64GB
+### Создаём tmpfs аккаунт 64GB
 #mkdir -p /root/solana/validator-ledger/accounts
 #echo 'tmpfs        /root/solana/validator-ledger/accounts tmpfs   nodev,nosuid,noexec,nodiratime,size=64G   0 0' >> /etc/fstab 
 #mount  /root/solana/validator-ledger/accounts
@@ -55,12 +50,28 @@ cd /root/solana
 ### generate identity
 ###solana-keygen new --outfile ./validator-keypair.json
 ###cat validator-keypair.json &&echo
-
 ### создаём файл с ключом, который генерировали до этого
+
+# Вариант А (просто переезд)
+### создаём файлы ключей validator-keypair и vote-account-keypair
+# На старой ноде:
+cat /root/solana/validator-keypair.json
+cat /root/solana/vote-account-keypair.json
+
+# На новой ноде:
 touch validator-keypair.json && chmod 0600 validator-keypair.json && echo edit validator-keypair.json && sleep 5 && nano validator-keypair.json
+touch vote-account-keypair.json && chmod 0600 vote-account-keypair.json && echo edit vote-account-keypair.json && sleep 5 && nano vote-account-keypair.json
+
+### Устанавливаем в конфиг сеть MN и ключ валидатора. 
 solana config set --url https://api.mainnet-beta.solana.com --keypair /root/solana/validator-keypair.json
+
+# Проверяем баланс
 solana balance
+
+# Шпионим в "сплетнях" ;-)
 solana-gossip spy --entrypoint mainnet-beta.solana.com:8001
+
+
 
 ### https://docs.solana.com/running-validator/validator-start#tune-system
 ##cat >/etc/sysctl.d/20-solana-udp-buffers.conf <<EOF
