@@ -1,5 +1,5 @@
 #=====================================================================================================================================
-# TdS service file 17/12/2021 [ver.1.8.11] - after restart
+# TdS service file 12/02/2022 [ver.1.9.6]
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
@@ -36,6 +36,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --limit-ledger-size 50000000 \
   --wal-recovery-mode skip_any_corrupted_record \
   --skip-poh-verify \
+  --full-rpc-api \
   --no-check-vote-account \
   --entrypoint ${ENTRYPOINT} \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
