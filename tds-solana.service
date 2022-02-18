@@ -44,3 +44,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --entrypoint entrypoint2.testnet.solana.com:8001 \
   --entrypoint entrypoint3.testnet.solana.com:8001 \
   --no-os-network-stats-reporting
+
+[Install]
+WantedBy=multi-user.target
