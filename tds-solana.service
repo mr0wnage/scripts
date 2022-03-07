@@ -41,9 +41,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --full-snapshot-interval-slots 15000 \
   --incremental-snapshot-interval-slots 10000 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --wait-for-supermajority 110973418 \
-  --expected-shred-version 12339 \
-  --expected-bank-hash WVDsuJJbhcdqH6vQrpZi5GYoPnMAaKw4THMtwes77DS \
   --entrypoint 5.9.35.85:8001 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
   --entrypoint entrypoint2.testnet.solana.com:8001 \
