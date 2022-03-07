@@ -39,7 +39,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --accounts-db-caching-enabled \
   --snapshot-archive-format bz2 \
   --full-snapshot-interval-slots 15000 \
-  --incremental-snapshot-interval-slots 10000 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
   --wait-for-supermajority 110973418 \
   --expected-shred-version 12339 \
