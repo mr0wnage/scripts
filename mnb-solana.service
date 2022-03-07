@@ -44,6 +44,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-port-check \
   --no-poh-speed-test \
   --skip-poh-verify \
+  --full-rpc-api \
   --no-check-vote-account \
   --snapshot-interval-slots 3000 \
   --snapshot-archive-format tar \
@@ -51,10 +52,3 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
 
 [Install]
 WantedBy=multi-user.target
-
-#  --wait-for-supermajority 96542804 \
-#  --no-snapshot-fetch \
-#  --no-genesis-fetch \
-#  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
-#  --expected-shred-version 8573 \
-#  --hard-fork 96542805 \
