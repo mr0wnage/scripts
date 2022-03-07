@@ -1,9 +1,8 @@
 #=====================================================================================================================================
-# TdS service file 07/03/2022 [ver.1.10.0]
+# TdS service file 18/02/2022 [ver.1.9.6]
 #=====================================================================================================================================
 [Unit]
-Description=Solana_TdS_node
-After=network.target
+Description=Solana TdS node
 After=sys-tuner-solana.service
 StartLimitIntervalSec=0
 
@@ -39,7 +38,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --accounts-db-caching-enabled \
   --snapshot-archive-format bz2 \
   --full-snapshot-interval-slots 15000 \
-  --incremental-snapshot-interval-slots 10000 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
   --entrypoint 5.9.35.85:8001 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
