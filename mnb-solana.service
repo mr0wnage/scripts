@@ -5,6 +5,7 @@
 [Unit]
 Description=Solana Validator
 After=network.target
+After=sys-tuner-solana.service
 StartLimitIntervalSec=0
 
 [Service]
