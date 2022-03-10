@@ -3,6 +3,7 @@
 #=====================================================================================================================================
 [Unit]
 Description=Solana TdS node
+After=network.target
 After=sys-tuner-solana.service
 StartLimitIntervalSec=0
 
