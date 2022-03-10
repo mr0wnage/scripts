@@ -1,6 +1,6 @@
 # ====================================
-# Solana MnB service file 07/03/2022
-# version 1.9.9
+# Solana MnB service file 10/03/2022
+# version 1.9.11
 # ====================================
 [Unit]
 Description=Solana Validator
@@ -47,8 +47,12 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --full-rpc-api \
   --no-check-vote-account \
   --snapshot-interval-slots 3000 \
-  --snapshot-archive-format tar \
-  --maximum-local-snapshot-age 500
-
+  --snapshot-archive-format zstd \
+  --full-snapshot-interval-slots 10000 \
+  --incremental-snapshot-interval-slots 2000 \
+  --maximum-full-snapshots-to-retain 2 \
+  --maximum-incremental-snapshots-to-retain 5 \
+  --maximum-local-snapshot-age 2000
+  
 [Install]
 WantedBy=multi-user.target
