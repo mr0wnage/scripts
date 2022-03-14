@@ -1,9 +1,9 @@
-# ====================================
-# Solana MnB service file 10/03/2022
-# version 1.9.11
-# ====================================
+# ======================================
+# Solana MainNet service file 15/03/2022
+# version 1.9.12
+# ======================================
 [Unit]
-Description=Solana Validator
+Description=Solana Mainnet Validator
 After=network.target
 After=sys-tuner-solana.service
 StartLimitIntervalSec=0
@@ -14,37 +14,38 @@ Restart=always
 RestartSec=1
 User=root
 LimitNOFILE=1000000
-Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password""
-Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
-Environment="RUST_LOG=solana=info"
+
 Environment="RUST_BACKTRACE=full"
+Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password'"
+Environment="RUST_LOG=solana=info"
+Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
+
+
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
-  --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \
-  --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
+  --entrypoint entrypoint4.mainnet-beta.solana.com:8001 \  --entrypoint entrypoint5.mainnet-beta.solana.com:8001 \
+  --known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
+  --known-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
+  --known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
+  --known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \   --known-validator F77qhZH7Net35Hz2EVUoqyUQuSMdSwxnLRwZZsAcN9X6 \
+  --ledger /root/solana/validator-ledger \
   --identity /root/solana/validator-keypair.json \
   --vote-account /root/solana/vote-account-keypair.json \
-  --expected-genesis-hash $EXPECTED_GENESIS_HASH \
-  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
-  --trusted-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
-  --trusted-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
-  --trusted-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
-  --trusted-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
-  --trusted-validator F77qhZH7Net35Hz2EVUoqyUQuSMdSwxnLRwZZsAcN9X6 \
-  --rpc-bind-address 127.0.0.1 \
-  --private-rpc \
-  --no-untrusted-rpc \
-  --dynamic-port-range 8001-8020 \
   --gossip-port 8001 \
   --rpc-port 8899 \
   --log - \
-  --ledger /root/solana/validator-ledger \
-  --limit-ledger-size 50000000 \
   --no-port-check \
-  --no-poh-speed-test \
+  --private-rpc \
+  --rpc-bind-address 127.0.0.1 \
+  --dynamic-port-range 8001-8020 \  
+  --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
+  --no-untrusted-rpc \
+  --limit-ledger-size 50000000 \
   --skip-poh-verify \
+  --no-poh-speed-test \
   --full-rpc-api \
   --no-check-vote-account \
   --snapshot-archive-format zstd \
