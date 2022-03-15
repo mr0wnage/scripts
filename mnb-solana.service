@@ -41,7 +41,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-port-check \
   --private-rpc \
   --rpc-bind-address 127.0.0.1 \
-  --dynamic-port-range 8001-8020 \  
+  --dynamic-port-range 8001-8020 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
   --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
   --no-untrusted-rpc \
