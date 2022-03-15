@@ -10,7 +10,7 @@ systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
 ### install mainnet beta (first install):
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.8.1/install/solana-install-init.sh | sh -s - v1.8.1
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.9.12/install/solana-install-init.sh | sh -s - v1.9.12
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
