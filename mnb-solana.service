@@ -1,6 +1,6 @@
 # ======================================
 # Solana MainNet service file 15/03/2022
-# version 1.10.2
+# version 1.9.12
 # ======================================
 [Unit]
 Description=Solana Mainnet Validator
