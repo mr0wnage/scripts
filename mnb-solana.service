@@ -1,6 +1,6 @@
 # ======================================
-# Solana MainNet service file 15/03/2022
-# version 1.9.12
+# Solana MainNet service file 30/05/2022
+# version 1.10.20
 # ======================================
 [Unit]
 Description=Solana Mainnet Validator
@@ -19,7 +19,6 @@ Environment="RUST_BACKTRACE=full"
 Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password'"
 Environment="RUST_LOG=solana=info"
 Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
-
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
@@ -43,7 +42,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8020 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --expected-bank-hash 5x6cLLsvsEbgbQxQNPoT1LvbTfYrx22kpXyzRxLKAMN3 \
   --no-untrusted-rpc \
   --limit-ledger-size 50000000 \
   --skip-poh-verify \
@@ -51,12 +49,9 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --full-rpc-api \
   --no-check-vote-account \
   --snapshot-archive-format zstd \
-  --full-snapshot-interval-slots 10000 \
-  --incremental-snapshots \
-  --incremental-snapshot-interval-slots 2000 \
-  --maximum-full-snapshots-to-retain 2 \
-  --maximum-incremental-snapshots-to-retain 5 \
-  --maximum-local-snapshot-age 2000
+  --full-snapshot-interval-slots 25000 \
+  --incremental-snapshot-interval-slots 1000 \
+  --maximum-local-snapshot-age 5000
   
 [Install]
 WantedBy=multi-user.target
