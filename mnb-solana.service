@@ -51,7 +51,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --snapshot-archive-format zstd \
   --full-snapshot-interval-slots 25000 \
   --incremental-snapshot-interval-slots 1000 \
-    --maximum-local-snapshot-age 5000
+  --maximum-local-snapshot-age 5000
   
 [Install]
 WantedBy=multi-user.target
