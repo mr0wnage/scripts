@@ -42,7 +42,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8020 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --expected-shred-version 51382 \
   --no-untrusted-rpc \
   --limit-ledger-size 50000000 \
   --skip-poh-verify \
