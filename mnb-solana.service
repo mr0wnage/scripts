@@ -1,6 +1,6 @@
 # ======================================
-# Solana MainNet service file 30/05/2022
-# version 1.10.20
+# Solana MainNet service file 07/07/2022
+# version 1.10.28
 # ======================================
 [Unit]
 Description=Solana Mainnet Validator
@@ -16,7 +16,7 @@ User=root
 LimitNOFILE=1000000
 
 Environment="RUST_BACKTRACE=full"
-Environment="SOLANA_METRICS_CONFIG='host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password'"
+Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password""
 Environment="RUST_LOG=solana=info"
 Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
 
