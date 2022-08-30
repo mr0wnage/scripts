@@ -44,6 +44,9 @@ rm -rf /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb
 #echo 'tmpfs        /root/solana/validator-ledger/accounts tmpfs   nodev,nosuid,noexec,nodiratime,size=64G   0 0' >> /etc/fstab 
 #mount  /root/solana/validator-ledger/accounts
 
+### https://docs.solana.com/running-validator/validator-monitor#timezone-for-log-messages
+ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+
 mkdir /root/solana
 cd /root/solana
 
