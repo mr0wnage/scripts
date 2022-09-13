@@ -1,6 +1,6 @@
 # ======================================
-# Solana TestNet service file 08/07/2022
-# version 1.11.1
+# Solana TestNet service file 13/09/2022
+# version 1.11.10
 # ======================================
 [Unit]
 Description=Solana TestNet Validator
@@ -40,7 +40,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --snapshot-archive-format zstd \
   --incremental-snapshot-interval-slots 2000 \
   --wal-recovery-mode skip_any_corrupted_record \
-  --entrypoint 5.9.35.85:8001 \
+  --entrypoint entrypoint.testnet.solana.sergo.dev:8001 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
   --entrypoint entrypoint2.testnet.solana.com:8001 \
   --entrypoint entrypoint3.testnet.solana.com:8001 \
