@@ -86,7 +86,11 @@ systemctl start solana
 
 journalctl -u solana.service -f --no-hostname | ccze
 
-#### Создаём скрин с кетчапилкой
+# Ставим систему мониторинга в КРОН
+
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh && rm ~/monitoring.sh
+
+# Запускам СКРИН с постоянной кетчапилкой
 screen -S solana.catchup -h 1000000
 # там запускаем
 while true; do echo sleep 15 and try catchup; sleep 15; solana catchup /root/solana/validator-keypair.json http://127.0.0.1:8899/; done
