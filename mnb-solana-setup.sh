@@ -1,5 +1,5 @@
 #
-# Last update 05/01/2022  version 1.8.11
+# Last update 12/10/2022  version 1.8.11 (версия ноды старая, добавил мониторинг)
 #
 ### Ставим оптимизацию CPU
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
@@ -109,9 +109,16 @@ solana vote-update-commission /root/solana/vote-account-keypair.json 10 /root/so
 systemctl start solana
 
 journalctl -u solana -f --no-hostname | ccze
+
+# Ставим систему мониторинга в КРОН
+
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh && rm ~/monitoring.sh
+
+# Запускам СКРИН с постоянной кетчапилкой
 screen -S solana.catchup -h 1000000
 
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts/ 2>/dev/null; timeout 30 solana catchup ~/solana/validator-keypair.json http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production  --epoch $(solana epoch )  | grep -e " Identity Pubkey\|$(solana-keygen pubkey /root/solana/validator-keypair.json)"; sleep 60; done
+#или
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts*/ 2>/dev/null; timeout 30 solana catchup ~/solana/validator-keypair.json http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production  --epoch $(solana epoch )  | grep -e " Identity Pubkey\|$(solana-keygen pubkey /root/solana/validator-keypair.json)"; for i in $(seq 1 6); do for j in $(seq 1 30); do echo -ne .; sleep 1; done; echo -ne $(( i * j )); done; echo ""; done
 
 ### create stake keypair - https://docs.solana.com/running-validator/validator-stake#create-stake-keypair
@@ -147,6 +154,3 @@ clear && solana stakes $SOLANA_VOTE_ADDRESS   ; echo identity balance: $(solana 
 
 ###
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts*/ 2>/dev/null; timeout 30 solana catchup $SOLANA_ADDRESS http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production    | grep -e " Identity \|$SOLANA_ADDRESS"; for i in $(seq 1 6); do for j in $(seq 1 30); do echo -ne .; sleep 1; done; echo -ne $(( i * j )); done; echo ""; done
-
-# monitoring
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh
