@@ -1,5 +1,5 @@
 #
-# Last update 24/10/2021  version 1.8.1
+# Last update 26/10/2022  version 1.14.5
 #
 ### Ставим оптимизацию CPU
 
@@ -10,7 +10,7 @@ systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
 ### install mainnet beta (first install):
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.9.12/install/solana-install-init.sh | sh -s - v1.9.12
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.14.5/install/solana-install-init.sh | sh -s - v1.14.5
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
