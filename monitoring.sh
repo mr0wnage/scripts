@@ -9,4 +9,4 @@ chmod +x /root/solana-telegram-balance.sh
 chmod +x /root/solana-telegram-delinq.sh
 chmod +x /root/solana-telegram-skip.sh
 chmod +x /root/solana-telegram-sync.sh
-clear; echo; echo "Dont forget:"; echo; echo "Edit /root/Send_msg_toTelBot.sh - token and chat ID"; echo; echo "Add to CRONTAB (via crontab -e):"; echo; echo "*/15 * * * * /root/solana-telegram-delinq.sh > /dev/null"; echo "0 */6 * * * /root/solana-telegram-skip.sh > /dev/null"; echo "*/15 * * * * /root/solana-telegram-sync.sh > /dev/null"; echo "* * 1 * * /root/solana-telegram-balance.sh > /dev/null"; echo
+clear; echo; echo "Dont forget:"; echo; echo "Edit /root/Send_msg_toTelBot.sh - token and chat ID"; echo; echo "Add to CRONTAB (via crontab -e):"; echo; echo "*/15 * * * * /root/solana-telegram-delinq.sh > /dev/null"; echo "0 */6 * * * /root/solana-telegram-skip.sh > /dev/null"; echo "*/15 * * * * /root/solana-telegram-sync.sh > /dev/null"; echo "0 */24 * * * /root/solana-telegram-balance.sh > /dev/null"; echo
