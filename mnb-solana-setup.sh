@@ -117,7 +117,7 @@ wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/
 # Запускам СКРИН с постоянной кетчапилкой
 screen -S solana.catchup -h 1000000
 # там запускаем
-while true; do echo sleep 15 and try catchup; sleep 15; solana catchup /root/solana/validator-keypair.json http://127.0.0.1:8899/; done
+while true; do time solana catchup /root/solana/validator-keypair.json http://127.0.0.1:8899/; sleep 15; done
 # выходим через ctrl+a+d
 # или что-то из этого в скрине, на свой выбор
 while true; do echo "______________ $(TZ=UTC date) ______________"; du -sh /root/solana/validator-ledger/ 2>/dev/null; du -sh /root/solana/validator-ledger/accounts/ 2>/dev/null; timeout 30 solana catchup ~/solana/validator-keypair.json http://127.0.0.1:8899/ || echo timeout; timeout 30 solana block-production  --epoch $(solana epoch )  | grep -e " Identity Pubkey\|$(solana-keygen pubkey /root/solana/validator-keypair.json)"; sleep 60; done
