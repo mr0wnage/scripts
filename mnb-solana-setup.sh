@@ -1,11 +1,11 @@
 #
-# Last update 12/10/2022  version 1.8.11 (версия ноды старая, добавил мониторинг)
+# Last update 29/10/2022  version 1.13.4
 #
 ### Ставим оптимизацию CPU
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.8.11/install/solana-install-init.sh | sh -s - v1.8.11
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.13.4/install/solana-install-init.sh | sh -s - v1.13.4
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
