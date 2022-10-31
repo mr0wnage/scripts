@@ -11,4 +11,4 @@ ACTIVE_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -w "Active Stake:" | awk 
 ACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i "activates" -B4 | grep Balance | awk '{print $2}' | paste -sd+ | bc)
 DEACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i "deactivates" -B4 | grep Balance | awk '{print $2}' | paste -sd+ | bc)
 
-"${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you: balances & stakes" "Validator balance: $VALI_BALANCE Vote balance: $VOTE_BALANCE: Active: $ACTIVE_STAKE Activating: $ACTIVATING_STAKE, Deactivating: $DEACTIVATING_STAKE" 2>&1 > /dev/null
+"${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:" "Validator balance: $VALI_BALANCE Vote balance: $VOTE_BALANCE STAKEs: Active: $ACTIVE_STAKE Activating: $ACTIVATING_STAKE, Deactivating: $DEACTIVATING_STAKE" 2>&1 > /dev/null
