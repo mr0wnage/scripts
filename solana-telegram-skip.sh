@@ -1,37 +1,28 @@
 #!/bin/bash
+SCRIPT_DIR="/root/"
+APP_SOLANA="/root/.local/share/solana/install/active_release/bin/solana"
+APP_SOLANA_KEYGEN="/root/.local/share/solana/install/active_release/bin/solana-keygen"
+KEY_VALI="/root/solana/validator-keypair.json"
+KEY_VOTE="/root/solana/vote-account-keypair.json"
 
-# input vars
-KEY_NAME="validator-keypair.json"
-SKIP_LIMIT=1
+PUBKEY_VALI=$(${APP_SOLANA_KEYGEN} pubkey ${KEY_VALI})
+PUBKEY_VOTE=$(${APP_SOLANA_KEYGEN} pubkey ${KEY_VOTE})
 
-# calc vars
-SCRIPT_DIR=/root/
-APP_SOLANA=/root/.local/share/solana/install/active_release/bin/solana
-APP_SOLANA_KEYGEN=/root/.local/share/solana/install/active_release/bin/solana-keygen
-KEYS_PATH=/root/solana/validator-keypair.json
-ID_PUBKEY=`${APP_SOLANA_KEYGEN} pubkey ${KEYS_PATH}`
+SKIP=$(${APP_SOLANA} block-production | grep -e ${PUBKEY_VALI})
+SKIP_PERCENT=$(echo ${SKIP} | gawk '{print $NF}')
+SKIP_PERCENT=${SKIP_PERCENT%"%"}
 
-# check skiprate
-SKIP=`${APP_SOLANA} block-production | grep -e ${ID_PUBKEY}`
-#SKIP=`${APP_SOLANA} block-production --url http://127.0.0.1:8899 | grep -e ${ID_PUBKEY}`
-SKIP_PECENT=`echo ${SKIP} | gawk '{print $NF}'`
-SKIP_PECENT=${SKIP_PECENT%"%"}
+SKIP_TOTAL=$(${APP_SOLANA} block-production | grep -e total)
+SKIP_PERCENT_TOTAL=$(echo ${SKIP_TOTAL} | gawk '{print $NF}')
+SKIP_PERCENT_TOTAL=${SKIP_PERCENT_TOTAL%"%"}
 
-SKIP_TOTAL=`${APP_SOLANA} block-production | grep -e total`
-#SKIP_TOTAL=`${APP_SOLANA} block-production --url http://127.0.0.1:8899 | grep -e total`
-SKIP_PECENT_TOTAL=`echo ${SKIP_TOTAL} | gawk '{print $NF}'`
-SKIP_PECENT_TOTAL=${SKIP_PECENT_TOTAL%"%"}
+echo "my skip ${SKIP_PERCENT}"
+echo "avg skip ${SKIP_PERCENT_TOTAL}"
 
-#echo "$SKIP"
-echo "my skip ${SKIP_PECENT}"
-echo "avg skip ${SKIP_PECENT_TOTAL}"
-
-
-if (( $(echo "${SKIP_PECENT} > ${SKIP_PECENT_TOTAL}" | bc -l) ))
+if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
 then
-        echo "`date` ALARM! skiprate is above average"
-         "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:" "!!! skiprate ${SKIP_PECENT}% is above average ${SKIP_PECENT_TOTAL}% !!!"  2>&1 > /dev/null
+	echo "`date` NODE ${PUBKEY_VALI} skiprate is below average."
 else
-        echo "`date` skiprate is below average" > /dev/null
-#        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME" "skiprate ${SKIP_PECENT}% is below average ${SKIP_PECENT_TOTAL}%"  2>&1 > /dev/null
+	echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate is above average!!!"
+	"${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:" "!!! Skiprate ${SKIP_PERCENT}% is above average ${SKIP_PERCENT_TOTAL}% !!!" 2>&1 > /dev/null
 fi
