@@ -1,6 +1,6 @@
 alias .catchup="while true; do time solana catchup /root/solana/validator-keypair.json http://127.0.0.1:8899/; sleep 15; done"
 alias .skip="echo 'DEV API:   $(solana block-production | grep $(solana address))'; echo 'Local API: $(solana block-production --url http://localhost:8899 | grep $(solana address))'"
-alias .validators="solana validators | grep 'Stake By Version:' -A 20"
+alias .validators="solana validators | grep 'Stake By Version:' -A 20 -B 8"
 
 
 alias .stakes=$(..stakes),$(..astakes),$(..dstakes)
