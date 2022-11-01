@@ -21,14 +21,14 @@ echo "avg skip ${SKIP_PERCENT_TOTAL}"
 
 if [[ ${SKIP_PERCENT} = "" ]]
 then
-        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:%0APubkey: ${PUBKEY_VALI}:" "Pizda rulu" 2>&1 > /dev/null
+        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME aletr!" "Pubkey: <b>${PUBKEY_VALI}</b>" "Pizda rulu" 2>&1 > /dev/null
 else
 if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
 then
         echo "`date` NODE ${PUBKEY_VALI} skiprate is below average."
-        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:%0APubkey: ${PUBKEY_VALI}:" "Skipate ${SKIP_PERCENT}% is <b>BELOW</b> average (${SKIP_PERCENT_TOTAL}%)." 2>&1 > /dev/null
+        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME alert!" "Pubkey: <b>${PUBKEY_VALI}</b>" "Node skiprate ${SKIP_PERCENT}% is <b>BELOW</b> average ${SKIP_PERCENT_TOTAL}%." 2>&1 > /dev/null
 else
         echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate is above average!!!"
-        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME (${PUBKEY_VALI}):" "ALARM!!! Skiprate ${SKIP_PERCENT}% is above average (${SKIP_PERCENT_TOTAL}%)).!!!" 2>&1 > /dev/null
+        "${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME alert!" "Pubkey: <b>${PUBKEY_VALI}</b>" "ALARM!!! Node skiprate ${SKIP_PERCENT}% is <b>ABOVE</b> average ${SKIP_PERCENT_TOTAL}%!!!" 2>&1 > /dev/null
 fi
 fi
