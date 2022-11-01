@@ -12,7 +12,7 @@ VALI_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VALI} | awk '{printf("%d\n", $1+0.
 VOTE_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VOTE} | awk '{printf("%d\n", $1+0.5)}')
 
 ACTIVE_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -w "Active Stake:" | awk '{print $3}' | awk '{s+=$1} END {printf("%d\n", s+0.5)}')
-ACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i "activates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
+ACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i " activates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
 DEACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i "deactivates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
 
 echo "`date` $HOSTNAME Validator balance: $VALI_BALANCE Vote balance: $VOTE_BALANCE STAKEs: Active: $ACTIVE_STAKE Activating: $ACTIVATING_STAKE, Deactivating: $DEACTIVATING_STAKE"
