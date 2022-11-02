@@ -30,7 +30,7 @@ else
 if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
 then
         echo "`date` Node ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is BELOW average ${SKIP_PERCENT_TOTAL}%."
-        "${TGBOT}" "${TG1}" "${TG2}" "Node skiprate <code>${SKIP_PERCENT}%</code> is <code>BELOW</code> average <code>${SKIP_PERCENT_TOTAL}%</code>." 2>&1 > /dev/null
+#        "${TGBOT}" "${TG1}" "${TG2}" "Node skiprate <code>${SKIP_PERCENT}%</code> is <code>BELOW</code> average <code>${SKIP_PERCENT_TOTAL}%</code>." 2>&1 > /dev/null
 else
         echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate is ABOVE average!!!"
         "${TGBOT}" "${TG1}" "${TG2}" "<b>ALARM!!!</b> Node skiprate <code>${SKIP_PERCENT}%</code> is <code>ABOVE</code> average <code>${SKIP_PERCENT_TOTAL}%</code>!!!" 2>&1 > /dev/null
