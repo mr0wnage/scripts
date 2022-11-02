@@ -11,14 +11,14 @@ curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.13.4/install/s
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
 # Устанавливаем solana-sys-tuner.service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service-file-solana-sys-tuner -O /etc/systemd/system/solana-sys-tuner.service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-systuner -O /etc/systemd/system/solana-sys-tuner.service
 chmod 0644 /etc/systemd/system/solana-sys-tuner.service
 systemctl daemon-reload
 systemctl enable solana-sys-tuner.service
 systemctl restart solana-sys-tuner.service
 
 # Устанавливаем solana.service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/mnb-solana.service -O /etc/systemd/system/solana.service
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-mnb -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
 systemctl enable solana.service
