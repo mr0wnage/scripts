@@ -20,5 +20,5 @@ then
         "${TGBOT}" "${TG1}" "${TG2}" "<b>ALARM!!!</b> Node is <code>OUT OF SYNC</code>!" 2>&1 > /dev/null
 else
         echo "`date` Node ${PUBKEY_VALI} is synced."
-        "${TGBOT}" "${TG1}" "${TG2}" "Node is <code>SYNCED</code>." 2>&1 > /dev/null
+#        "${TGBOT}" "${TG1}" "${TG2}" "Node is <code>SYNCED</code>." 2>&1 > /dev/null
 fi
