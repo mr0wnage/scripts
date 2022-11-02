@@ -20,8 +20,8 @@ SKIP_TOTAL=$(${APP_SOLANA} block-production | grep -e total)
 SKIP_PERCENT_TOTAL=$(echo ${SKIP_TOTAL} | gawk '{print $NF}')
 SKIP_PERCENT_TOTAL=${SKIP_PERCENT_TOTAL%"%"}
 
-echo "my skip ${SKIP_PERCENT}"
-echo "avg skip ${SKIP_PERCENT_TOTAL}"
+#echo "my skip ${SKIP_PERCENT}"
+#echo "avg skip ${SKIP_PERCENT_TOTAL}"
 
 if [[ ${SKIP_PERCENT} = "" ]]
 then
@@ -29,7 +29,7 @@ then
 else
 if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
 then
-        echo "`date` Node ${PUBKEY_VALI} skiprate is below average."
+        echo "`date` Node ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is below average ${SKIP_PERCENT_TOTAL}%."
 #        "${TGBOT}" "${TG1}" "${TG2}" "Node skiprate ${SKIP_PERCENT}% is <b>BELOW</b> average ${SKIP_PERCENT_TOTAL}%." 2>&1 > /dev/null
 else
         echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate is above average!!!"
