@@ -88,7 +88,7 @@ journalctl -u solana.service -f --no-hostname | ccze
 
 # Ставим систему мониторинга в КРОН
 
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh && rm ~/monitoring.sh
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/setup.solana-monitoring.sh -O ~/setup.solana-monitoring.sh && bash ~/setup.solana-monitoring.sh && rm ~/setup.solana-monitoring.sh
 
 # Запускам СКРИН с постоянной кетчапилкой
 screen -S solana.catchup -h 1000000
