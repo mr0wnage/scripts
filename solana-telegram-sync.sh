@@ -8,12 +8,17 @@ KEY_VOTE="/root/solana/vote-account-keypair.json"
 PUBKEY_VALI=$(${APP_SOLANA_KEYGEN} pubkey ${KEY_VALI})
 PUBKEY_VOTE=$(${APP_SOLANA_KEYGEN} pubkey ${KEY_VOTE})
 
+TG1="${HOSTNAME} sync alert!"
+TG2="Pubkey: <b>${PUBKEY_VALI}</b>"
+TGBOT="${SCRIPT_DIR}/Send_msg_toTelBot.sh"
+
 INSYNC=$(timeout 30 ${APP_SOLANA} catchup ${KEY_VALI} http://127.0.0.1:8899 | grep caught)
 
 if [[ -z ${INSYNC} ]]
 then
-	echo "`date` ALARM! NODE ${PUBKEY_VALI} is out of sync!"
-	"${SCRIPT_DIR}/Send_msg_toTelBot.sh" "$HOSTNAME inform you:" "ALARM! NODE ${PUBKEY_VALI} is out of sync!" 2>&1 > /dev/null
+        echo "`date` ALARM! Node ${PUBKEY_VALI} is OUT of sync!!!"
+        "${TGBOT}" "${TG1}" "${TG2}" "ALARM! Node is <b>OUT OF SYNC!</b>" 2>&1 > /dev/null
 else
-	echo "`date` NODE ${PUBKEY_VALI} is synced!"
+        echo "`date` Node ${PUBKEY_VALI} is synced."
+#        "${TGBOT}" "${TG1}" "${TG2}" "Node is <b>SYNCED</b>." 2>&1 > /dev/null
 fi
