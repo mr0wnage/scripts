@@ -12,8 +12,10 @@ TG1="${HOSTNAME} sol alert!"
 TG2="Pubkey: <b>${PUBKEY_VALI}</b>"
 TGBOT="${SCRIPT_DIR}/Send_msg_toTelBot.sh"
 
-VALI_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VALI} | awk '{printf("%d\n", $1+0.5)}')
-VOTE_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VOTE} | awk '{printf("%d\n", $1+0.5)}')
+#VALI_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VALI} | awk '{printf("%d\n", $1+0.5)}')
+#VOTE_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VOTE} | awk '{printf("%d\n", $1+0.5)}')
+VALI_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VALI} | awk '{printf("%.2f \n", $1)}')
+VOTE_BALANCE=$(${APP_SOLANA} balance -k ${KEY_VOTE} | awk '{printf("%.2f \n", $1)}')
 
 ACTIVE_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -w "Active Stake:" | awk '{print $3}' | awk '{s+=$1} END {printf("%d\n", s+0.5)}')
 ACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i " activates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
