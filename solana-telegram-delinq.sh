@@ -20,5 +20,5 @@ then
 #        "${TGBOT}" "${TG1}" "${TG2}" "Node is <code>NOT</code> delinquent!" 2>&1 > /dev/null
 else
         echo "`date` ALARM! NODE ${PUBKEY_VALI} is DELINQUENT!!!"
-        "${TGBOT}" "${TG1}" "${TG2$}" "<b>ALARM!!!</b> Node is <code>DELINQUENT!</code>" 2>&1 > /dev/null
+        "${TGBOT}" "${TG1}" "${TG2}" "<b>ALARM!!!</b> Node is <code>DELINQUENT!</code>" 2>&1 > /dev/null
 fi
