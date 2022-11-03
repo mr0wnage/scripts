@@ -32,7 +32,7 @@ then
         echo "`date` Node ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is BELOW average ${SKIP_PERCENT_TOTAL}%."
 #        "${TGBOT}" "${TG1}" "${TG2}" "Node skiprate <code>${SKIP_PERCENT}%</code> is <code>BELOW</code> average <code>${SKIP_PERCENT_TOTAL}%</code>." 2>&1 > /dev/null
 else
-        echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate is ABOVE average!!!"
+        echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is ABOVE average ${SKIP_PERCENT_TOTAL}%!!!"
         "${TGBOT}" "${TG1}" "${TG2}" "<b>ALARM!!!</b> Node skiprate <code>${SKIP_PERCENT}%</code> is <code>ABOVE</code> average <code>${SKIP_PERCENT_TOTAL}%</code>!!!" 2>&1 > /dev/null
 fi
 fi
