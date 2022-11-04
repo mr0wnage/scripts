@@ -34,6 +34,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --maximum-local-snapshot-age 2000 \
   --private-rpc \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --no-snapshot-fetch \
   --wait-for-supermajority 160991176 \
   --expected-shred-version 8135 \
   --entrypoint entrypoint.testnet.solana.sergo.dev:8001 \
