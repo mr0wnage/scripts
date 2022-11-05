@@ -19,5 +19,5 @@ ACTIVE_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -w "Active Stake:" | awk 
 ACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i " activates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
 DEACTIVATING_STAKE=$(${APP_SOLANA} stakes ${KEY_VOTE} | grep -i "deactivates" -B4 | grep Balance | awk '{printf("%d\n", $2+0.5)}' | paste -sd+ | bc)
 
-echo "`date` Node $PUBKEY_VALI BALANCE: validator - $VALI_BALANCE vote - $VOTE_BALANCE STAKE: active - $ACTIVE_STAKE activating - $ACTIVATING_STAKE deactivating - $DEACTIVATING_STAKE"
+echo "`date` Node $PUBKEY_VALI BALANCE: validator - $VALI_BALANCE vote - $VOTE_BALANCE STAKE: active - $ACTIVE_STAKE (activating - $ACTIVATING_STAKE deactivating - $DEACTIVATING_STAKE)"
 "${TGBOT}" "${TG1}" "${TG2}" "<b>BALANCE:</b> validator - <code>$VALI_BALANCE</code> vote - <code>$VOTE_BALANCE</code> %0A<b>STAKE:</b> - <code>$ACTIVE_STAKE</code> (activating - <code>$ACTIVATING_STAKE</code> deactivating - <code>$DEACTIVATING_STAKE</code>)" 2>&1 > /dev/null
