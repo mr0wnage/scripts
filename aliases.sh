@@ -13,11 +13,4 @@ alias .mhz='watch -n 1 "cat /proc/cpuinfo | grep -i mhz"'
 
 
 
-
-
-
-
-alias .stakes=$(..stakes),$(..astakes),$(..dstakes)
-alias ..stakes="echo 'Active Stake:' && solana stakes /root/solana/vote-account-keypair.json | grep -w 'Active Stake:' | awk '{print $3}' | awk '{s+=$1} END {print s}'"
-alias ..astakes="echo 'Activating Stake:' && solana stakes /root/solana/vote-account-keypair.json | grep -i 'activates' -A5 -B5 | grep Balance | awk '{print $2}' | paste -sd+ | bc"
-alias ..dstakes="echo 'Deactivating Stake:' && solana stakes /root/solana/vote-account-keypair.json | grep -i 'deactivates' -A5 -B5 | grep Balance | awk '{print $2}' | paste -sd+ | bc"
+alias .balance='solana balance -k /root/solana/validator-keypair.json && solana balance -k /root/solana/vote-account-keypair.json && solana balance ????????????'
