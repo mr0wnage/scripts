@@ -13,8 +13,8 @@ echo
 echo
 crontab -l | 
     { 
-        echo "#solana cronjobs on $HOSTNAME" ;
-        echo "" ;
+        echo "# Solana cronjobs on $HOSTNAME" ;
+        echo "#" ;
         echo "*/15 * * * * /root/solana-telegram-delinq.sh > /dev/null";
         echo "0 */6 * * * /root/solana-telegram-skip.sh > /dev/null";
         echo "*/15 * * * * /root/solana-telegram-sync.sh > /dev/null";
