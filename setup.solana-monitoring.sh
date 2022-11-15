@@ -9,8 +9,6 @@ chmod +x /root/solana-telegram-delinq.sh
 chmod +x /root/solana-telegram-skip.sh
 chmod +x /root/solana-telegram-sync.sh
 clear
-echo
-echo
 crontab -l | 
     { 
         echo "# Solana cronjobs on $HOSTNAME" ;
