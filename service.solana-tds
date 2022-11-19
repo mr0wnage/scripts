@@ -1,6 +1,6 @@
 # ======================================
-# Solana TestNet service file 13/09/2022
-# version 1.11.10
+# Solana TestNet service file 19/11/2022
+# version 1.14.7
 # ======================================
 [Unit]
 Description=Solana TdS
@@ -31,6 +31,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8020 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
   --limit-ledger-size 50000000 \
   --full-rpc-api \
   --no-check-vote-account \
