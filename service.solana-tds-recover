@@ -23,7 +23,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --ledger /root/solana/validator-ledger \
   --identity /root/solana/validator-keypair.json \
   --vote-account /root/solana/vote-account-keypair.json \  
-
+  --gossip-port 8001 \
   --rpc-port 8899 \
   --log - \
   --no-port-check \
@@ -36,7 +36,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --limit-ledger-size 50000000 \
   --full-rpc-api \
   --accounts /root/solana/validator-ledger/accounts \
-  --no-poh-speed-test
+  --no-poh-speed-test \
   --wait-for-supermajority 161660256 \
   --expected-shred-version 6995 \
   --incremental-snapshot-interval-slots 2000 \
