@@ -31,6 +31,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8020 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
   --limit-ledger-size 50000000 \
   --full-rpc-api \
   --no-check-vote-account \
@@ -51,6 +53,3 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
 
 [Install]
 WantedBy=multi-user.target
-
-#  --no-snapshot-fetch \
-#  --no-genesis-fetch \
