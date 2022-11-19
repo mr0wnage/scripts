@@ -3,10 +3,10 @@
 # version 1.11.10
 # ======================================
 [Unit]
-Description=Solana TestNet Validator
+Description=Solana TdS
 After=network.target
-After=sys-tuner-solana.service
 StartLimitIntervalSec=0
+After=solana-sys-tuner.service
 
 [Service]
 Type=simple
