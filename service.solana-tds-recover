@@ -33,6 +33,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --maximum-incremental-snapshots-to-retain 4 \
   --maximum-local-snapshot-age 2000 \
   --private-rpc \
+  --full-rpc-api \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
   --no-snapshot-fetch \
   --no-genesis-fetch \
