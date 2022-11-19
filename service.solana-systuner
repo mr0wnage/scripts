@@ -1,5 +1,5 @@
 [Unit]
-Description=Solana sys-tuner
+Description=Solana Sys-tuner
 PartOf=solana.service
 After=network.target
 StartLimitIntervalSec=0
