@@ -3,10 +3,10 @@
 # version 1.10.29
 # ======================================
 [Unit]
-Description=Solana Mainnet Validator
+Description=Solana MnB
 After=network.target
-After=sys-tuner-solana.service
 StartLimitIntervalSec=0
+After=solana-sys-tuner.service
 
 [Service]
 Type=simple
