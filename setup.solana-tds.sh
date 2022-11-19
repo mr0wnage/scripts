@@ -127,4 +127,4 @@ solana validator-info publish "???" -n ??? -w "???" - d "???"
 # solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com" -d "Some detail info here"
 
 # monitoring
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/monitoring.sh -O ~/monitoring.sh && bash ~/monitoring.sh
+wget https://raw.githubusercontent.com/mr0wnage/scripts/main/setup.solana-monitoring.sh -O ~/setup.solana-monitoring.sh && bash ~/setup.solana-monitoring.sh && rm ~/setup.solana-monitoring.sh
