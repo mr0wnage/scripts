@@ -47,8 +47,16 @@ cd /root/solana
 ###solana-keygen new --outfile ./validator-keypair.json
 ###cat validator-keypair.json &&echo
 
-### создаём файл с ключом, который генерировали до этого
+# Вариант А (просто переезд)
+### создаём файлы ключей validator-keypair и vote-account-keypair
+# На старой ноде:
+cat /root/solana/validator-keypair.json
+cat /root/solana/vote-account-keypair.json
+
+# На новой ноде:
 touch validator-keypair.json && chmod 0600 validator-keypair.json && echo edit validator-keypair.json && sleep 5 && nano validator-keypair.json
+touch vote-account-keypair.json && chmod 0600 vote-account-keypair.json && echo edit vote-account-keypair.json && sleep 5 && nano vote-account-keypair.json
+
 
 solana config set --url http://api.testnet.solana.com --keypair /root/solana/validator-keypair.json
 
