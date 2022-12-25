@@ -25,13 +25,13 @@ SKIP_PERCENT_TOTAL=${SKIP_PERCENT_TOTAL%"%"}
 
 if [[ ${SKIP_PERCENT} = "" ]]
   then
-      echo "`date` Node ${PUBKEY_VALI} zero blocks yet."
-      #"${TGBOT}" "${TG1}" "${TG2}" "Pizda rulu" 2>&1 > /dev/null
+      #echo "`date` Node ${PUBKEY_VALI} zero blocks yet."
+      "${TGBOT}" "${TG1}" "${TG2}" "Zero blocks yet!" 2>&1 > /dev/null
   else
       if [[ ${SKIP_PERCENT_TOTAL} = "" ]]
         then
-            echo "`date` Node ${PUBKEY_VALI} Total skip error!"
-            #"${TGBOT}" "${TG1}" "${TG2}" "Pizda rulu" 2>&1 > /dev/null
+            #echo "`date` Node ${PUBKEY_VALI} Total skip error!"
+            "${TGBOT}" "${TG1}" "${TG2}" "Total skip error!" 2>&1 > /dev/null
         else
             if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
               then
