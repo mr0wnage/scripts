@@ -25,17 +25,17 @@ SKIP_PERCENT_TOTAL=${SKIP_PERCENT_TOTAL%"%"}
 
 if [[ ${SKIP_PERCENT} = "" ]]
   then
-      #echo "`date` Node ${PUBKEY_VALI} zero blocks yet."
-      "${TGBOT}" "${TG1}" "${TG2}" "Zero blocks yet!" 2>&1 > /dev/null
+      echo "`date` Node ${TG2} zero blocks yet."
+      #"${TGBOT}" "${TG1}" "${TG2}" "Zero blocks yet!" 2>&1 > /dev/null
   else
       if [[ ${SKIP_PERCENT_TOTAL} = "" ]]
         then
-            #echo "`date` Node ${PUBKEY_VALI} Total skip error!"
-            "${TGBOT}" "${TG1}" "${TG2}" "Total skip error!" 2>&1 > /dev/null
+            echo "`date` Node ${TG2} Total skip error!"
+            #"${TGBOT}" "${TG1}" "${TG2}" "Total skip error!" 2>&1 > /dev/null
         else
             if (( $(echo "${SKIP_PERCENT} < ${SKIP_PERCENT_TOTAL}" | bc -l) ))
               then
-                  echo "`date` Node ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is BELOW average ${SKIP_PERCENT_TOTAL}%."
+                  echo "`date` Node ${TG2} skiprate ${SKIP_PERCENT}% is BELOW average ${SKIP_PERCENT_TOTAL}%."
                   #"${TGBOT}" "${TG1}" "${TG2}" "Node skiprate <code>${SKIP_PERCENT}%</code> is <code>BELOW</code> average <code>${SKIP_PERCENT_TOTAL}%</code>." 2>&1 > /dev/null
               else
                   echo "`date` ALARM! NODE ${PUBKEY_VALI} skiprate ${SKIP_PERCENT}% is ABOVE average ${SKIP_PERCENT_TOTAL}%!!!"
