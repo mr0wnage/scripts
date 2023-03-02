@@ -17,5 +17,9 @@ crontab -l |
         echo "0 */6 * * * /root/solana-telegram-skip.sh > /dev/null";
         echo "*/15 * * * * /root/solana-telegram-sync.sh > /dev/null";
         echo "0 0 * * * /root/solana-telegram-balance.sh > /dev/null";
-    } | crontab -)"
+     } | crontab -
+echo
+echo "Dont forget:"
+echo "Edit /root/Send_msg_toTelBot.sh - token and chat ID (nano /root/Send_msg_toTelBot.sh)"
+
 nano /root/Send_msg_toTelBot.sh
