@@ -21,5 +21,5 @@ crontab -l |
 echo
 echo "Dont forget:"
 echo "Edit /root/Send_msg_toTelBot.sh - token and chat ID (nano /root/Send_msg_toTelBot.sh)"
-
+sleep 5
 nano /root/Send_msg_toTelBot.sh
