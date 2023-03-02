@@ -18,4 +18,4 @@ crontab -l |
         echo "*/15 * * * * /root/solana-telegram-sync.sh > /dev/null";
         echo "0 0 * * * /root/solana-telegram-balance.sh > /dev/null";
     } | crontab -)"
-bash nano /root/Send_msg_toTelBot.sh
+nano /root/Send_msg_toTelBot.sh
