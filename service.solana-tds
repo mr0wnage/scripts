@@ -1,5 +1,5 @@
 # ======================================
-# Solana TestNet service file 19/11/2022
+# Solana TestNet service file 16/03/2023
 # version 1.14.7
 # ======================================
 [Unit]
@@ -39,6 +39,7 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --skip-poh-verify \
   --no-os-network-stats-reporting \
   --accounts-db-caching-enabled \
+  --disable-accounts-disk-index \
   --snapshot-archive-format zstd \
   --incremental-snapshot-interval-slots 2000 \
   --wal-recovery-mode skip_any_corrupted_record \
