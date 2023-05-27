@@ -1,9 +1,9 @@
 # ======================================
-# Solana TestNet service file 18/11/2022
+# Solana TestNet service file 27/05/2023
 # version *recover edition*
 # ======================================
 [Unit]
-Description=Solana TdS [recover]
+Description=Solana TdS
 After=network.target
 StartLimitIntervalSec=0
 After=solana-sys-tuner.service
@@ -14,15 +14,15 @@ Restart=always
 RestartSec=1
 User=root
 LimitNOFILE=2048000
-
-Environment="RUST_LOG=solana=info"
+LogRateLimitIntervalSec=0
+Environment="RUST_BACKTRACE=full"
 Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea""
 Environment="EXPECTED_GENESIS_HASH=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --ledger /root/solana/validator-ledger \
   --identity /root/solana/validator-keypair.json \
-  --vote-account /root/solana/vote-account-keypair.json \  
+  --vote-account /root/solana/vote-account-keypair.json \
   --gossip-port 8001 \
   --rpc-port 8899 \
   --log - \
@@ -35,23 +35,21 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-genesis-fetch \
   --limit-ledger-size 50000000 \
   --full-rpc-api \
-  --accounts /root/solana/validator-ledger/accounts \
-  --no-poh-speed-test \
-  --wait-for-supermajority 161660256 \
-  --expected-shred-version 6995 \
+  --no-check-vote-account \
+  --skip-poh-verify \
+  --no-os-network-stats-reporting \
+  --accounts-db-caching-enabled \
+  --disable-accounts-disk-index \
+  --snapshot-archive-format zstd \
   --incremental-snapshot-interval-slots 2000 \
+  --wal-recovery-mode skip_any_corrupted_record \
   --entrypoint entrypoint.testnet.solana.sergo.dev:8001 \
-  --entrypoint tsolv.im-0.net:8000 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
   --entrypoint entrypoint2.testnet.solana.com:8001 \
   --entrypoint entrypoint3.testnet.solana.com:8001 \
-  --expected-bank-hash GjU2DYkVVcd4LD3Yew1xSL8XibvVnhVse2U6b5JdNDhN \
-  --known-validator eoKpUABi59aT4rR9HGS3LcMecfut9x7zJyodWWP43YQ \
-  --known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \
-  --known-validator td2GGWDsCJ6LvjN89oLJvmrDwE14neNrbqQ9s3tVkPy \
-  --known-validator td3n5NGhP7JKWrL638gzau3NY7mF4K3ztZww3GkpywJ  \
-  --known-validator FnpP7TK6F2hZFVnqSUJagZefwRJ4fmnb1StS1NokpLZM \
-  --known-validator BFquPCAYdjN9QyLVfuGrQdJTF9Ct7Z85FDxhFeLcpFqR
+  --wait-for-supermajority 199641374 \
+  --expected-bank-hash 7qKeiLLRxvxkD2hZx1Ai1RABKMg7x2n4GVJFcrEh3js2 \
+  --expected-shred-version 28353
 
 [Install]
 WantedBy=multi-user.target
