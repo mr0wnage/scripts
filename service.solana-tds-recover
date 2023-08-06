@@ -1,5 +1,5 @@
 # ======================================
-# Solana TestNet service file 27/05/2023
+# Solana TestNet service file 06/08/2023
 # version *recover edition*
 # ======================================
 [Unit]
@@ -48,8 +48,9 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --entrypoint entrypoint2.testnet.solana.com:8001 \
   --entrypoint entrypoint3.testnet.solana.com:8001 \
   --wait-for-supermajority 199641374 \
-  --expected-bank-hash 7qKeiLLRxvxkD2hZx1Ai1RABKMg7x2n4GVJFcrEh3js2 \
-  --expected-shred-version 28353
+  --expected-bank-hash 4cyHLxMPCJH4pq9v6eVDFBKKNwrVw8ww78yYUSJNDvjU \
+  --wait-for-supermajority 213932256 \
+  --expected-shred-version 61807
 
 [Install]
 WantedBy=multi-user.target
