@@ -1,6 +1,35 @@
 #
 # Last update 29/10/2022  version 1.13.4
 #
+### Настраиваем 
+bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
+# Increase UDP buffer sizes
+net.core.rmem_default = 134217728
+net.core.rmem_max = 134217728
+net.core.wmem_default = 134217728
+net.core.wmem_max = 134217728
+
+# Increase memory mapped files limit
+vm.max_map_count = 1000000
+
+# Increase number of allowed open file descriptors
+fs.nr_open = 1000000
+EOF"
+
+sysctl -p /etc/sysctl.d/21-solana-validator.conf
+
+# Add
+LimitNOFILE=1000000
+# to the [Service] section of your systemd service file, if you use one, otherwise add
+DefaultLimitNOFILE=1000000
+#to the [Manager] section of /etc/systemd/system.conf
+systemctl daemon-reload
+
+bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
+# Increase process file descriptor count limit
+* - nofile 1000000
+EOF"
+
 ### Ставим оптимизацию CPU
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
