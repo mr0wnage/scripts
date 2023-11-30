@@ -1,7 +1,7 @@
 #
-# Last update 29/10/2022  version 1.13.4
+# Last update 30/11/2023  version 1.16.20
 #
-### Настраиваем 
+### Настраиваем машинку
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
 # Increase UDP buffer sizes
 net.core.rmem_default = 134217728
@@ -15,17 +15,18 @@ vm.max_map_count = 1000000
 # Increase number of allowed open file descriptors
 fs.nr_open = 1000000
 EOF"
-
+#
 sysctl -p /etc/sysctl.d/21-solana-validator.conf
-
+###
 
 nano /etc/systemd/system.conf
 # Add
 LimitNOFILE=1000000
 DefaultLimitNOFILE=1000000
-
+#
 systemctl daemon-reload
 
+###
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
 # Increase process file descriptor count limit
 * - nofile 1000000
@@ -40,25 +41,11 @@ curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.13.4/install/s
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
-# Устанавливаем solana-sys-tuner.service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-systuner -O /etc/systemd/system/solana-sys-tuner.service
-chmod 0644 /etc/systemd/system/solana-sys-tuner.service
-systemctl daemon-reload
-systemctl enable solana-sys-tuner.service
-systemctl restart solana-sys-tuner.service
-
 # Устанавливаем solana.service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-mnb -O /etc/systemd/system/solana.service
 chmod 0644 /etc/systemd/system/solana.service
 systemctl daemon-reload
 systemctl enable solana.service
-
-# Update
-export ver_install=1.8.11 && \
-solana-install init $ver_install && \
-unset ver_install && \
-systemctl restart solana-sys-tuner && \
-echo version upgraded, sys-tuner restarted, solana service NOT restarted
 
 ### Исключаем solana-validator из rsyslog
 echo 'if $programname == "solana-validator" then stop' > /etc/rsyslog.d/01-solana-remove.conf && systemctl restart rsyslog
