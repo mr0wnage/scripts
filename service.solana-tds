@@ -35,18 +35,25 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-genesis-fetch \
   --no-untrusted-rpc \
   --no-poh-speed-test \
+  --no-os-memory-stats-reporting \
+  --no-os-network-stats-reporting \
+  --no-os-cpu-stats-reporting \
   --limit-ledger-size 50000000 \
+  --tpu-enable-udp \
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --no-os-network-stats-reporting \
+  --accounts-db-skip-shrink \
   --accounts-db-caching-enabled \
   --disable-accounts-disk-index \
   --snapshot-archive-format zstd \
   --full-snapshot-interval-slots 25000 \
   --incremental-snapshot-interval-slots 1000 \
-  --maximum-full-snapshots-to-retain 2 \
-  --maximum-incremental-snapshots-to-retain 4 \
+  --maximum-full-snapshots-to-retain 1 \
+  --maximum-incremental-snapshots-to-retain 2 \
+  --minimal-snapshot-download-speed 30485760 \
+  --maximum-local-snapshot-age 2500 \
+  --rocksdb-shred-compaction fifo \
   --wal-recovery-mode skip_any_corrupted_record \
   --entrypoint entrypoint.testnet.solana.sergo.dev:8001 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
