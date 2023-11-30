@@ -18,14 +18,12 @@ EOF"
 #
 sysctl -p /etc/sysctl.d/21-solana-validator.conf
 ###
-
 nano /etc/systemd/system.conf
 # Add
 LimitNOFILE=1000000
 DefaultLimitNOFILE=1000000
 #
 systemctl daemon-reload
-
 ###
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
 # Increase process file descriptor count limit
@@ -36,7 +34,7 @@ EOF"
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.13.4/install/solana-install-init.sh | sh -s - v1.13.4
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.16.20/install/solana-install-init.sh | sh -s - v1.16.20
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
@@ -91,26 +89,6 @@ solana balance
 # Шпионим в "сплетнях" ;-)
 solana-gossip spy --entrypoint mainnet-beta.solana.com:8001
 
-
-
-### https://docs.solana.com/running-validator/validator-start#tune-system
-##cat >/etc/sysctl.d/20-solana-udp-buffers.conf <<EOF
-# Increase UDP buffer size
-#net.core.rmem_default = 134217728
-#net.core.rmem_max = 134217728
-#net.core.wmem_default = 134217728
-#net.core.wmem_max = 134217728
-#EOF
-
-#sysctl -p /etc/sysctl.d/20-solana-udp-buffers.conf
-
-#cat >/etc/sysctl.d/20-solana-mmaps.conf <<EOF
-## Increase memory mapped files limit
-#vm.max_map_count = 1024000
-#EOF
-
-#sysctl -p /etc/sysctl.d/20-solana-mmaps.conf
-
 ###create vote account - https://docs.solana.com/running-validator/validator-start#create-vote-account
 solana-keygen new -o /root/solana/vote-account-keypair.json
 
@@ -145,7 +123,7 @@ solana-keygen new -o /root/solana/validator-stake-keypair.json
 cat validator-stake-keypair.json &&echo
 
 ### delegate
-solana create-stake-account /root/solana/validator-stake-keypair.json 100
+solana create-stake-account /root/solana/validator-stake-keypair.json 101
 
 solana delegate-stake /root/solana/validator-stake-keypair.json /root/solana/vote-account-keypair.json 
 
@@ -158,11 +136,9 @@ solana stake-account /root/solana/validator-stake-keypair.json
 solana validators | grep -e "$(solana-keygen pubkey /root/solana/validator-keypair.json)"
 
 ### publish info about validator
-solana validator-info publish "<some name that will show up in explorer>" -n <keybase_username> -w "<website>"
+solana validator-info publish "<some name that will show up in explorer>" -w "<website>" -d "<some info>" -i "<img url>"
 ### example:
-###solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com"
-###solana validator-info publish "Elvis Validator" -n elvis
-###solana validator-info publish "Elvis Validator" 
+# solana validator-info publish "Name" -w "https://name.ru" -d "Name with US!" -i https://name.ru/name.jpg
 
 ###
 echo "export SOLANA_ADDRESS=$(solana-keygen pubkey /root/solana/validator-keypair.json)" | tee -a ~/.bashrc 
