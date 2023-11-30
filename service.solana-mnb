@@ -43,7 +43,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --no-os-network-stats-reporting \
   --accounts-db-skip-shrink \
   --accounts-db-caching-enabled \
   --disable-accounts-disk-index \
