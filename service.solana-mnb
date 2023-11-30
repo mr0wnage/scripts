@@ -1,6 +1,6 @@
 # ======================================
-# Solana MainNet service file 08/07/2022
-# version 1.10.29
+# Solana MainNet service file 30/11/2023
+# version 1.16.20
 # ======================================
 [Unit]
 Description=Solana MnB
@@ -29,18 +29,33 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --no-port-check \
   --private-rpc \
   --rpc-bind-address 127.0.0.1 \
-  --dynamic-port-range 8001-8020 \
+  --dynamic-port-range 8001-8100 \
   --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
   --no-snapshot-fetch \
   --no-genesis-fetch \
+  --no-untrusted-rpc \
+  --no-poh-speed-test \
+  --no-os-memory-stats-reporting \
+  --no-os-network-stats-reporting \
+  --no-os-cpu-stats-reporting \
   --limit-ledger-size 50000000 \
+  --tpu-enable-udp \
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --no-untrusted-rpc \
-  --no-poh-speed-test \
+  --no-os-network-stats-reporting \
+  --accounts-db-skip-shrink \
+  --accounts-db-caching-enabled \
+  --disable-accounts-disk-index \
   --snapshot-archive-format zstd \
-  --incremental-snapshot-interval-slots 2000 \
+  --full-snapshot-interval-slots 25000 \
+  --incremental-snapshot-interval-slots 1000 \
+  --maximum-full-snapshots-to-retain 1 \
+  --maximum-incremental-snapshots-to-retain 2 \
+  --minimal-snapshot-download-speed 30485760 \
+  --maximum-local-snapshot-age 2500 \
+  --rocksdb-shred-compaction fifo \
+  --wal-recovery-mode skip_any_corrupted_record \
   --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
