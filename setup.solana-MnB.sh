@@ -18,11 +18,12 @@ EOF"
 
 sysctl -p /etc/sysctl.d/21-solana-validator.conf
 
+
+nano /etc/systemd/system.conf
 # Add
 LimitNOFILE=1000000
-# to the [Service] section of your systemd service file, if you use one, otherwise add
 DefaultLimitNOFILE=1000000
-#to the [Manager] section of /etc/systemd/system.conf
+
 systemctl daemon-reload
 
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
