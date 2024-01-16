@@ -1,12 +1,11 @@
 # ======================================
-# Solana TestNet service file 30/11/2023
-# version 1.17.0
+# Solana TestNet service file 15/01/2024
+# version 1.17.16
 # ======================================
 [Unit]
 Description=Solana TdS
 After=network.target
 StartLimitIntervalSec=0
-After=solana-sys-tuner.service
 
 [Service]
 Type=simple
@@ -17,7 +16,6 @@ LimitNOFILE=2048000
 LogRateLimitIntervalSec=0
 Environment="RUST_BACKTRACE=full"
 Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea""
-Environment="EXPECTED_GENESIS_HASH=4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY"
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --ledger /root/solana/validator-ledger \
@@ -30,30 +28,21 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --private-rpc \
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8100 \
-  --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
+  --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \
   --no-snapshot-fetch \
   --no-genesis-fetch \
-  --no-untrusted-rpc \
-  --no-poh-speed-test \
-  --no-os-memory-stats-reporting \
-  --no-os-network-stats-reporting \
-  --no-os-cpu-stats-reporting \
   --limit-ledger-size 50000000 \
-  --tpu-enable-udp \
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --accounts-db-skip-shrink \
   --accounts-db-caching-enabled \
   --disable-accounts-disk-index \
   --snapshot-archive-format zstd \
   --full-snapshot-interval-slots 25000 \
   --incremental-snapshot-interval-slots 1000 \
-  --maximum-full-snapshots-to-retain 1 \
-  --maximum-incremental-snapshots-to-retain 2 \
-  --minimal-snapshot-download-speed 30485760 \
-  --maximum-local-snapshot-age 2500 \
-  --rocksdb-shred-compaction fifo \
+  --maximum-full-snapshots-to-retain 2 \
+  --maximum-incremental-snapshots-to-retain 4 \
+  --use-snapshot-archives-at-startup when-newest \
   --wal-recovery-mode skip_any_corrupted_record \
   --entrypoint entrypoint.testnet.solana.sergo.dev:8001 \
   --entrypoint entrypoint.testnet.solana.com:8001 \
