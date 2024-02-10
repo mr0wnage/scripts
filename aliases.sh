@@ -20,3 +20,4 @@ alias .stakes_activates="solana stakes /root/solana/vote-account-keypair.json | 
 alias .stakes_deactivates="solana stakes /root/solana/vote-account-keypair.json | grep -i 'deactivates' -A5 -B5 | grep Balance | awk '{s+=\$2} END {print s}'"
 
 alias .sfdp="solana-foundation-delegation-program list | grep $(solana address) -B1"
+alias .jito="solana balance `solxact pda 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 [ string TIP_DISTRIBUTION_ACCOUNT pubkey $(solana address -k /root/solana/vote-account-keypair.json ) u64 $(solana epoch) ] | cut -d '.' -f 1`"
