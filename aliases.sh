@@ -18,3 +18,5 @@ alias .stakes="echo 'Active Stake:'; .stakes_active; echo 'Activating Stake:'; .
 alias .stakes_active="solana stakes /root/solana/vote-account-keypair.json | grep -w 'Active Stake:' | awk '{print \$3}' | awk '{s+=\$1} END {print s}'"
 alias .stakes_activates="solana stakes /root/solana/vote-account-keypair.json | grep -i ' activates ' -A5 -B5 | grep Activating | awk '{s+=\$3} END {print s}'"
 alias .stakes_deactivates="solana stakes /root/solana/vote-account-keypair.json | grep -i 'deactivates' -A5 -B5 | grep Balance | awk '{s+=\$2} END {print s}'"
+
+alias .sfdp="solana-foundation-delegation-program list | grep $(solana address) -B1"
