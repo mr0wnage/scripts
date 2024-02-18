@@ -12,7 +12,11 @@ alias .snap-update='docker pull c29r3/solana-snapshot-finder:latest'
 
 alias .mhz='watch -n 1 "cat /proc/cpuinfo | grep -i mhz"'
 
-alias .balance='solana balance -k /root/solana/validator-keypair.json && solana balance -k /root/solana/vote-account-keypair.json && solana balance ??????????????????'
+alias .balance='.balance_i && .balance_v && .balance_r && .balance_j'
+alias .balance_i='echo "identity:  $(solana balance -k /root/solana/validator-keypair.json)"'
+alias .balance_v='echo "vote-acc:  $(solana balance -k /root/solana/vote-account-keypair.json)"'
+alias .balance_r='echo "rewards :  $(solana balance ___________________)"'
+alias .balance_j='echo "jito-acc:  $(solana balance `solxact pda 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 [ string TIP_DISTRIBUTION_ACCOUNT pubkey $(solana address -k /root/solana/vote-account-keypair.json ) u64 $(solana epoch) ] | cut -d '.' -f 1`)"'
 
 alias .stakes="echo 'Active Stake:'; .stakes_active; echo 'Activating Stake:'; .stakes_activates; echo 'Deactivating Stake:'; .stakes_deactivates"
 alias .stakes_active="solana stakes /root/solana/vote-account-keypair.json | grep -w 'Active Stake:' | awk '{print \$3}' | awk '{s+=\$1} END {print s}'"
@@ -21,3 +25,4 @@ alias .stakes_deactivates="solana stakes /root/solana/vote-account-keypair.json 
 
 alias .sfdp="solana-foundation-delegation-program list | grep $(solana address) -B1"
 alias .jito="solana balance `solxact pda 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 [ string TIP_DISTRIBUTION_ACCOUNT pubkey $(solana address -k /root/solana/vote-account-keypair.json ) u64 $(solana epoch) ] | cut -d '.' -f 1`"
+alias .jitoprev="solana balance `solxact pda 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 [ string TIP_DISTRIBUTION_ACCOUNT pubkey $(solana address -k /root/solana/vote-account-keypair.json ) u64 $(($(solana epoch)-1)) ] | cut -d '.' -f 1`"
