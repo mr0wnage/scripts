@@ -1,6 +1,6 @@
 # ======================================
-# Solana TestNet service file 15/01/2024
-# version 1.17.16
+# Solana TestNet service file 20/02/2024
+# version 1.18.2
 # ======================================
 [Unit]
 Description=Solana TdS
