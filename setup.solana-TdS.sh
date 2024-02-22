@@ -1,5 +1,5 @@
 #
-# Last update 26/10/2022  version 1.14.5
+# Last update 22/02/2024  solana version 1.18.2
 #
 ### Ставим оптимизацию CPU
 
@@ -10,17 +10,18 @@ systemctl restart cpufrequtils.service && \
 systemctl disable ondemand
 
 ### install mainnet beta (first install):
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.14.5/install/solana-install-init.sh | sh -s - v1.14.5
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.18.2/install/solana-install-init.sh | sh -s - v1.18.2
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
 
+# skip - не используется!
 # Устанавливаем solana-sys-tuner.service
-wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-systuner -O /etc/systemd/system/solana-sys-tuner.service
-chmod 0644 /etc/systemd/system/solana-sys-tuner.service
-systemctl daemon-reload
-systemctl enable solana-sys-tuner.service
-systemctl restart solana-sys-tuner.service
+#wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-systuner -O /etc/systemd/system/solana-sys-tuner.service
+#chmod 0644 /etc/systemd/system/solana-sys-tuner.service
+#systemctl daemon-reload
+#systemctl enable solana-sys-tuner.service
+#systemctl restart solana-sys-tuner.service
 
 # Устанавливаем service
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/service.solana-tds -O /etc/systemd/system/solana.service
@@ -56,7 +57,6 @@ cat /root/solana/vote-account-keypair.json
 # На новой ноде:
 touch validator-keypair.json && chmod 0600 validator-keypair.json && echo edit validator-keypair.json && sleep 5 && nano validator-keypair.json
 touch vote-account-keypair.json && chmod 0600 vote-account-keypair.json && echo edit vote-account-keypair.json && sleep 5 && nano vote-account-keypair.json
-
 
 solana config set --url http://api.testnet.solana.com --keypair /root/solana/validator-keypair.json
 
@@ -129,10 +129,9 @@ solana stakes | grep "$(solana-keygen pubkey /root/solana/validator-stake-keypai
 solana vote-update-commission /root/solana/vote-account-keypair.json 10 /root/solana/validator-keypair.json
 
 ### publish info about validator
-solana validator-info publish "???" -n ??? -w "???" - d "???"
-
+solana validator-info publish "???" -n ??? -w "???" -i "???"
 # example:
-# solana validator-info publish "Elvis Validator" -n elvis -w "https://elvis-validates.com" -d "Some detail info here"
+solana validator-info publish "_name_" -w "_web_site_" -d "_infofmation_" -i https://www.com/image.jpg
 
 # monitoring
 wget https://raw.githubusercontent.com/mr0wnage/scripts/main/setup.solana-monitoring.sh -O ~/setup.solana-monitoring.sh && bash ~/setup.solana-monitoring.sh && rm ~/setup.solana-monitoring.sh
