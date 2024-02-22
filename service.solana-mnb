@@ -1,23 +1,23 @@
 # ======================================
-# Solana MainNet service file 30/11/2023
-# version 1.16.20
+# Solana MainNet service file 22/02/2024
+# version 1.17.22
 # ======================================
 [Unit]
-Description=Solana MnB
+Description=Solana Validator
 After=network.target
 StartLimitIntervalSec=0
-After=solana-sys-tuner.service
 
 [Service]
 Type=simple
 Restart=always
 RestartSec=1
 User=root
-LimitNOFILE=2048000
+LimitNOFILE=2097152
 
-Environment="RUST_BACKTRACE=full"
 Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=mainnet-beta,u=mainnet-beta_write,p=password""
-Environment="EXPECTED_GENESIS_HASH=5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d"
+Environment="BLOCK_ENGINE_URL=https://ny.mainnet.block-engine.jito.wtf"
+Environment="RELAYER_URL=http://ny.mainnet.relayer.jito.wtf:8100"
+Environment="SHRED_RECEIVER_ADDR=141.98.216.96:1002"
 
 ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
   --ledger /root/solana/validator-ledger \
@@ -27,34 +27,26 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-port 8899 \
   --log - \
   --no-port-check \
+  --no-snapshot-fetch \
+  --no-genesis-fetch \
   --private-rpc \
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8100 \
-  --expected-genesis-hash ${EXPECTED_GENESIS_HASH} \
-  --no-snapshot-fetch \
-  --no-genesis-fetch \
-  --no-untrusted-rpc \
-  --no-poh-speed-test \
-  --no-os-memory-stats-reporting \
-  --no-os-network-stats-reporting \
-  --no-os-cpu-stats-reporting \
+  --expected-genesis-hash 5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d \
   --limit-ledger-size 50000000 \
-  --tpu-enable-udp \
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --accounts-db-skip-shrink \
-  --accounts-db-caching-enabled \
-  --disable-accounts-disk-index \
-  --snapshot-archive-format zstd \
+  --no-untrusted-rpc \
+  --no-poh-speed-test \
+  --wal-recovery-mode skip_any_corrupted_record \
   --full-snapshot-interval-slots 25000 \
   --incremental-snapshot-interval-slots 1000 \
+  --use-snapshot-archives-at-startup when-newest \
   --maximum-full-snapshots-to-retain 1 \
   --maximum-incremental-snapshots-to-retain 2 \
-  --minimal-snapshot-download-speed 30485760 \
-  --maximum-local-snapshot-age 2500 \
-  --rocksdb-shred-compaction fifo \
-  --wal-recovery-mode skip_any_corrupted_record \
+  --minimal-snapshot-download-speed 31457280 \
+  --snapshot-packager-niceness-adjustment 100 \
   --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint2.mainnet-beta.solana.com:8001 \
   --entrypoint entrypoint3.mainnet-beta.solana.com:8001 \
@@ -63,7 +55,15 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --known-validator CakcnaRDHka2gXyfbEd2d3xsvkJkqsLw2akB3zsN1D2S \
   --known-validator DE1bawNcRJB9rVm3buyMVfr8mBEoyyu73NBovf2oXJsJ \
   --known-validator GdnSyH3YtwcxFvQrVVJMm1JhTS4QVX7MFsX56uJLUfiZ \
-  --known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2
-
-[Install]
-WantedBy=multi-user.target
+  --known-validator 7Np41oeYqPefeNQEHSv1UDhYrehxin3NStELsSKCT4K2 \
+  --known-validator 5D1fNXzvv5NjV1ysLjirC4WY92RNsVH18vjmcszZd8on \
+  --known-validator 7XSY3MrYnK8vq693Rju17bbPkCN3Z7KvvfvJx4kdrsSY \
+  --known-validator Ft5fbkqNa76vnsjYNwjDZUXoTWpP7VYm3mtsaQckQADN \
+  --known-validator 9QxCLckBiJc783jnMvXZubK4wH86Eqqvashtrwvcsgkv \
+  --tip-payment-program-pubkey T1pyyaTNZsKv2WcRAB8oVnk93mLJw2XzjtVYqCsaHqt \
+  --tip-distribution-program-pubkey 4R3gSG8BpU4t19KYj8CfnbtRpnT8gtk4dvTHxVRwc2r7 \
+  --merkle-root-upload-authority GZctHpWXmsZC1YHACTGGcHhYxjdRqQvTpYkb9LMvxDib \
+  --commission-bps 10000 \
+  --relayer-url ${RELAYER_URL} \
+  --block-engine-url ${BLOCK_ENGINE_URL} \
+  --shred-receiver-address ${SHRED_RECEIVER_ADDR}
