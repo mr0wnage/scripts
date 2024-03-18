@@ -43,8 +43,8 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --full-snapshot-interval-slots 25000 \
   --incremental-snapshot-interval-slots 1000 \
   --use-snapshot-archives-at-startup when-newest \
-  --maximum-full-snapshots-to-retain 1 \
-  --maximum-incremental-snapshots-to-retain 2 \
+  --maximum-full-snapshots-to-retain 2 \
+  --maximum-incremental-snapshots-to-retain 4 \
   --minimal-snapshot-download-speed 31457280 \
   --snapshot-packager-niceness-adjustment 100 \
   --entrypoint entrypoint.mainnet-beta.solana.com:8001 \
@@ -67,3 +67,6 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --relayer-url ${RELAYER_URL} \
   --block-engine-url ${BLOCK_ENGINE_URL} \
   --shred-receiver-address ${SHRED_RECEIVER_ADDR}
+
+[Install]
+WantedBy=multi-user.target
