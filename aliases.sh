@@ -4,6 +4,7 @@ alias .validators='solana validators | grep "Stake By Version:" -A 20 -B 8'
 alias .slotsum='solana leader-schedule | grep $(solana address) | wc -l'
 alias .slot='while true; do solana slot; sleep 5; done'
 alias .epoch='solana epoch-info'
+alias .monitor='solana-validator --ledger /root/solana/validator-ledger/ monitor'
 alias .credits='solana validators -ul --sort=credits -r -n | grep $(solana address)'
 alias .creditsfull='solana validators -ul --sort=credits -r -n | sed -n 1,101p && solana validators -ul --sort=credits -r -n | grep -e $(solana address)'
 
