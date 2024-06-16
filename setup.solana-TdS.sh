@@ -1,7 +1,7 @@
 #
+# Solana TESTNET setup
 # Last update 16/06/2024  solana version 1.18.16
 #
-### Ставим оптимизацию CPU
 
 ### Настраиваем машинку
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
