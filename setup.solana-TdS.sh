@@ -1,16 +1,42 @@
 #
-# Last update 22/02/2024  solana version 1.18.2
+# Last update 16/06/2024  solana version 1.18.16
 #
 ### Ставим оптимизацию CPU
 
-apt-get update && \
-echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && \
-apt-get install -y cpufrequtils moreutils && \
-systemctl restart cpufrequtils.service && \
-systemctl disable ondemand
+### Настраиваем машинку
+bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
+# Increase UDP buffer sizes
+net.core.rmem_default = 134217728
+net.core.rmem_max = 134217728
+net.core.wmem_default = 134217728
+net.core.wmem_max = 134217728
+
+# Increase memory mapped files limit
+vm.max_map_count = 1000000
+
+# Increase number of allowed open file descriptors
+fs.nr_open = 1000000
+EOF"
+#
+sysctl -p /etc/sysctl.d/21-solana-validator.conf
+###
+nano /etc/systemd/system.conf
+# Add
+LimitNOFILE=1000000
+DefaultLimitNOFILE=1000000
+#
+systemctl daemon-reload
+###
+bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
+# Increase process file descriptor count limit
+* - nofile 1000000
+EOF"
+
+### Ставим оптимизацию CPU
+apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### install mainnet beta (first install):
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.18.2/install/solana-install-init.sh | sh -s - v1.18.2
+curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.18.16/install/solana-install-init.sh | sh -s - v1.18.16
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
