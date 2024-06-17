@@ -1,6 +1,8 @@
 #
+# Solana MAINNET setup
 # Last update 30/11/2023  version 1.16.20
 #
+
 ### Настраиваем машинку
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
 # Increase UDP buffer sizes
