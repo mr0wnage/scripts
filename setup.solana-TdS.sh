@@ -90,7 +90,7 @@ solana config set --url http://api.testnet.solana.com --keypair /root/solana/val
 solana balance
 
 #### 10 сек смотрим на логи и потом ctrl-c
-solana-gossip spy --entrypoint testnet.solana.com:8001
+solana-gossip spy --entrypoint entrypoint.testnet.solana.com:8001
 
 ###create vote account ->>> https://docs.solana.com/running-validator/validator-start#create-vote-account
 solana-keygen new -o /root/solana/vote-account-keypair.json
