@@ -1,6 +1,6 @@
 # ======================================
-# Solana TestNet service file 20/02/2024
-# version 1.18.2
+# Solana (anza client) TestNet service file 12/08/2024
+# version 2.0.5
 # ======================================
 [Unit]
 Description=Solana TdS
@@ -9,7 +9,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-Restart=always
+Restart=never
 RestartSec=1
 User=root
 LimitNOFILE=2048000
@@ -17,7 +17,7 @@ LogRateLimitIntervalSec=0
 Environment="RUST_BACKTRACE=full"
 Environment="SOLANA_METRICS_CONFIG="host=https://metrics.solana.com:8086,db=tds,u=testnet_write,p=c4fa841aa918bf8274e3e2a44d77568d9861b3ea""
 
-ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator \
+ExecStart=/root/.local/share/solana/install/active_release/bin/agave-validator \
   --ledger /root/solana/validator-ledger \
   --identity /root/solana/validator-keypair.json \
   --vote-account /root/solana/vote-account-keypair.json \
@@ -29,13 +29,10 @@ ExecStart=/root/.local/share/solana/install/active_release/bin/solana-validator 
   --rpc-bind-address 127.0.0.1 \
   --dynamic-port-range 8001-8100 \
   --expected-genesis-hash 4uhcVJyU9pJkvQyS88uRDiswHXSCkY3zQawwpjk2NsNY \
-  --no-snapshot-fetch \
-  --no-genesis-fetch \
   --limit-ledger-size 50000000 \
   --full-rpc-api \
   --no-check-vote-account \
   --skip-poh-verify \
-  --accounts-db-caching-enabled \
   --disable-accounts-disk-index \
   --snapshot-archive-format zstd \
   --full-snapshot-interval-slots 25000 \
