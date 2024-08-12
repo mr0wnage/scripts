@@ -9,7 +9,7 @@ StartLimitIntervalSec=0
 
 [Service]
 Type=simple
-Restart=never
+Restart=always
 RestartSec=1
 User=root
 LimitNOFILE=2048000
