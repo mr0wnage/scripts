@@ -1,6 +1,6 @@
 #
-# Solana TESTNET setup
-# Last update 16/06/2024  solana version 1.18.16
+# Solana TESTNET setup  (anza)
+# Last update 12/08/2024  solana version 2.0.5
 #
 
 ### Настраиваем машинку
@@ -36,7 +36,8 @@ EOF"
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### install mainnet beta (first install):
-curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.18.16/install/solana-install-init.sh | sh -s - v1.18.16
+# OLD: curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.18.16/install/solana-install-init.sh | sh -s - v1.18.16
+sh -c "$(curl -sSfL https://release.anza.xyz/v2.0.5/install)"
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
