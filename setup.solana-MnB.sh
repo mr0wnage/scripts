@@ -22,7 +22,9 @@ sysctl -p /etc/sysctl.d/21-solana-validator.conf
 ###
 nano /etc/systemd/system.conf
 # Add
+[Service]
 LimitNOFILE=1000000
+[Manager]
 DefaultLimitNOFILE=1000000
 #
 systemctl daemon-reload
