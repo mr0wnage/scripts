@@ -39,6 +39,7 @@ apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default
 
 ### Install mainnet beta  (first install)
 curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.16.20/install/solana-install-init.sh | sh -s - v1.16.20
+sh -c "$(curl -sSfL https://release.jito.wtf/v1.18.22-jito/install)"
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
