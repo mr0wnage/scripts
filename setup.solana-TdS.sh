@@ -12,7 +12,7 @@ net.core.wmem_default = 134217728
 net.core.wmem_max = 134217728
 
 # Increase memory mapped files limit
-vm.max_map_count = 1000000
+vm.max_map_count = 3000000
 
 # Increase number of allowed open file descriptors
 fs.nr_open = 1000000
@@ -26,7 +26,7 @@ net.core.wmem_default = 134217728
 net.core.wmem_max = 134217728
 
 # Increase memory mapped files limit
-vm.max_map_count = 1000000
+vm.max_map_count = 3000000
 
 # Increase number of allowed open file descriptors
 fs.nr_open = 1000000
@@ -39,9 +39,9 @@ sysctl -p /etc/sysctl.d/21-agave-validator.conf
 nano /etc/systemd/system.conf
 # Add
 [Service]
-LimitNOFILE=1000000
+LimitNOFILE=3000000
 [Manager]
-DefaultLimitNOFILE=1000000
+DefaultLimitNOFILE=3000000
 #
 systemctl daemon-reload
 ###
