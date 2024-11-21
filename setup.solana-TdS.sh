@@ -47,7 +47,7 @@ systemctl daemon-reload
 ###
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
 # Increase process file descriptor count limit
-* - nofile 1000000
+* - nofile 3000000
 EOF"
 
 ### Ставим оптимизацию CPU
