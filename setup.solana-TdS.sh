@@ -6,30 +6,30 @@
 ### Настраиваем машинку
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
 # Increase UDP buffer sizes
-net.core.rmem_default = 134217728
-net.core.rmem_max = 134217728
-net.core.wmem_default = 134217728
-net.core.wmem_max = 134217728
+net.core.rmem_default = 268435456
+net.core.rmem_max = 268435456
+net.core.wmem_default = 268435456
+net.core.wmem_max = 268435456
 
 # Increase memory mapped files limit
 vm.max_map_count = 3000000
 
 # Increase number of allowed open file descriptors
-fs.nr_open = 1000000
+fs.nr_open = 3000000
 EOF"
 
 bash -c "cat >/etc/sysctl.d/21-agave-validator.conf <<EOF
 # Increase UDP buffer sizes
-net.core.rmem_default = 134217728
-net.core.rmem_max = 134217728
-net.core.wmem_default = 134217728
-net.core.wmem_max = 134217728
+net.core.rmem_default = 268435456
+net.core.rmem_max = 268435456
+net.core.wmem_default = 268435456
+net.core.wmem_max = 268435456
 
 # Increase memory mapped files limit
 vm.max_map_count = 3000000
 
 # Increase number of allowed open file descriptors
-fs.nr_open = 1000000
+fs.nr_open = 3000000
 EOF"
 #
 sysctl -p /etc/sysctl.d/21-solana-validator.conf
