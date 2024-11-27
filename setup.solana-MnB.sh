@@ -6,40 +6,59 @@
 ### Настраиваем машинку
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
 # Increase UDP buffer sizes
-net.core.rmem_default = 134217728
-net.core.rmem_max = 134217728
-net.core.wmem_default = 134217728
-net.core.wmem_max = 134217728
+net.core.rmem_default = 268435456
+net.core.rmem_max = 268435456
+net.core.wmem_default = 268435456
+net.core.wmem_max = 268435456
 
 # Increase memory mapped files limit
-vm.max_map_count = 1000000
+vm.max_map_count = 3000000
 
 # Increase number of allowed open file descriptors
-fs.nr_open = 1000000
+fs.nr_open = 3000000
+EOF"
+
+bash -c "cat >/etc/sysctl.d/21-agave-validator.conf <<EOF
+# Increase UDP buffer sizes
+net.core.rmem_default = 268435456
+net.core.rmem_max = 268435456
+net.core.wmem_default = 268435456
+net.core.wmem_max = 268435456
+
+# Increase memory mapped files limit
+vm.max_map_count = 3000000
+
+# Increase number of allowed open file descriptors
+fs.nr_open = 3000000
 EOF"
 #
 sysctl -p /etc/sysctl.d/21-solana-validator.conf
+sysctl -p /etc/sysctl.d/21-agave-validator.conf
 ###
 nano /etc/systemd/system.conf
 # Add
 [Service]
-LimitNOFILE=1000000
+LimitNOFILE=3000000
 [Manager]
-DefaultLimitNOFILE=1000000
+DefaultLimitNOFILE=3000000
 #
 systemctl daemon-reload
 ###
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
 # Increase process file descriptor count limit
-* - nofile 1000000
+* - nofile 3000000
 EOF"
-
+###
+bash -c "cat >/etc/security/limits.d/90-agave-nofiles.conf <<EOF
+# Increase process file descriptor count limit
+* - nofile 3000000
+EOF"
 ### Ставим оптимизацию CPU
 apt-get update && echo -e 'ENABLE="true"\nGOVERNOR="performance"' > /etc/default/cpufrequtils && apt-get install -y cpufrequtils moreutils && systemctl restart cpufrequtils.service && systemctl disable ondemand
 
 ### Install mainnet beta  (first install)
 curl -sSf https://raw.githubusercontent.com/solana-labs/solana/v1.16.20/install/solana-install-init.sh | sh -s - v1.16.20
-sh -c "$(curl -sSfL https://release.jito.wtf/v1.18.22-jito/install)"
+sh -c "$(curl -sSfL https://release.jito.wtf/v2.0.15-jito/install)"
 
 ### Экспортнуть PATH или перезайти в терминал
 export PATH="/root/.local/share/solana/install/active_release/bin:$PATH"
