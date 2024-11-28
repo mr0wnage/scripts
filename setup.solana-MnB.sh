@@ -71,6 +71,7 @@ systemctl enable solana.service
 
 ### Исключаем solana-validator из rsyslog
 echo 'if $programname == "solana-validator" then stop' > /etc/rsyslog.d/01-solana-remove.conf && systemctl restart rsyslog
+echo 'if $programname == "agave-validator" then stop' > /etc/rsyslog.d/01-solana-remove.conf && sudo systemctl restart rsyslog
 
 ### Устанавливаем prometheus-node-exporter 0.17.0+ds-3+b11 just because it works with my current dashboard
 lsb_release -a 2>&1 | grep -q Ubuntu && \
