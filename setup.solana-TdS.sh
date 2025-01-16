@@ -84,7 +84,7 @@ dpkg -i /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb && \
 rm -rf /root/prometheus-node-exporter_0.17.0+ds-3+b11_amd64.deb
 
 ### https://docs.solana.com/running-validator/validator-monitor#timezone-for-log-messages
-ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
+ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
 mkdir /root/solana
 cd /root/solana
