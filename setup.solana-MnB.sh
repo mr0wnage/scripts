@@ -1,9 +1,22 @@
 #
 # Solana MAINNET setup
-# Last update 30/11/2023  version 1.16.20
+# Last update 31/03/2025  version 1.16.20
 #
 
 ### Настраиваем машинку
+###
+nano /etc/sysctl.conf
+###
+vm.max_map_count=2097152
+fs.file-max=2097152
+fs.nr_open=2097152
+net.core.rmem_default = 134217728
+net.core.rmem_max = 134217728
+net.core.wmem_default = 134217728
+net.core.wmem_max = 134217728
+###
+sysctl -p
+###
 bash -c "cat >/etc/sysctl.d/21-solana-validator.conf <<EOF
 # Increase UDP buffer sizes
 net.core.rmem_default = 268435456
@@ -43,6 +56,13 @@ LimitNOFILE=3000000
 DefaultLimitNOFILE=3000000
 #
 systemctl daemon-reload
+###
+nano /etc/security/limits.conf
+#
+* soft nofile 2097152 
+* hard nofile 2097152 
+root soft nofile 2097152 
+root hard nofile 2097152
 ###
 bash -c "cat >/etc/security/limits.d/90-solana-nofiles.conf <<EOF
 # Increase process file descriptor count limit
@@ -89,6 +109,16 @@ ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 mkdir /root/solana
 cd /root/solana
 
+# rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+rustup install stable
+rustup update stable
+rustup default stable
+rustup component add rustfmt
+rustc --version
+###
+
+sudo apt-get install libssl-dev libudev-dev pkg-config zlib1g-dev llvm clang cmake make libprotobuf-dev protobuf-compiler
 ### generate identity
 ###solana-keygen new --outfile ./validator-keypair.json
 ###cat validator-keypair.json &&echo
